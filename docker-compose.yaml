@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:latest
+    container_name: treep
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: remind
+      MYSQL_ROOT_PASSWORD: 2122
+    ports:
+      - "3306:3306"
