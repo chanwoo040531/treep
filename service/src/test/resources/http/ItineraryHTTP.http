@@ -1,0 +1,13 @@
+### 일정 생성
+POST http://localhost:8080/api/v1/plans/1/itinerary
+Content-Type: application/json
+
+{
+  "title": "아침 식사",
+  "cost": 0,
+  "startAt": "2023-10-06T08:00:00",
+  "endAt": "2023-10-06T09:00:00",
+  "location": "논산 훈련소",
+  "restaurantName": "식당",
+  "restaurantAddress": "논산 훈련소 식당"
+}
