@@ -1,46 +1,66 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id("org.springframework.boot") version "3.1.5"
+    id("org.springframework.boot") version "3.1.5" apply false
     id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
 }
 
-group = "me.chnu"
-version = "0.0.1-SNAPSHOT"
-
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
+allprojects {
+    group = "me.chnu"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
+//
+//    configurations {
+//        compileOnly {
+//            extendsFrom(configurations.annotationProcessor.get())
+//        }
+//    }
+}
+
+subprojects {
+    apply(plugin = "kotlin")
+    apply(plugin = "kotlin-spring")
+    apply(plugin = "io.spring.dependency-management")
+
+
+    dependencies {
+        // JWT 인증
+        implementation("com.auth0:java-jwt:4.4.0")
+
+        // Kotlin
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+        // Kotlin Logging
+        implementation("io.github.microutils:kotlin-logging:1.12.5")
+
+
+        // MySQL
+        compileOnly("com.mysql:mysql-connector-j")
+
+        // docker-compose
+        implementation("org.springframework.boot:spring-boot-docker-compose")
+
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom(SpringBootPlugin.BOM_COORDINATES)
+        }
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-    // db
-    compileOnly("com.mysql:mysql-connector-j")
-
-    // docker-compose
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-
-}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -53,6 +73,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.bootBuildImage {
-    builder.set("paketobuildpacks/builder-jammy-base:latest")
-}
+//tasks.bootBuildImage {
+//    builder.set("paketobuildpacks/builder-jammy-base:latest")
+//}
