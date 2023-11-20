@@ -1,4 +1,4 @@
-package me.chnu.treep.domain.itinerary
+package me.chnu.treep.domain.itinerary.entity
 
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
@@ -14,9 +14,10 @@ internal class DiningItinerary(
     override var startAt: LocalDateTime,
     override var endAt: LocalDateTime,
     override var location: String,
+    var restaurantName: String,
+    var restaurantAddress: String,
 
-) : Itinerary(
-    itineraryType = ItineraryType.DINING,
+    ) : Itinerary(
     tripPlanId =tripPlanId,
     title = title,
     cost = cost,

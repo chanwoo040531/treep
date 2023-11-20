@@ -1,4 +1,4 @@
-package me.chnu.treep.domain.itinerary
+package me.chnu.treep.domain.itinerary.entity
 
 import jakarta.persistence.DiscriminatorColumn
 import jakarta.persistence.Entity
@@ -19,6 +19,5 @@ internal open class Itinerary(
     open var cost: Long,
     open var startAt: LocalDateTime,
     open var endAt: LocalDateTime,
-    open var location: String,
-    var itineraryType: ItineraryType
+    open var location: String
 ) : BaseEntity()
