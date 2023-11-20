@@ -1,4 +1,4 @@
-package me.chnu.treep.common.annotation
+package me.chnu.treep.annotation
 
 import org.springframework.core.annotation.AliasFor
 import org.springframework.stereotype.Component
