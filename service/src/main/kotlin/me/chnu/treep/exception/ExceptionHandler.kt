@@ -3,11 +3,9 @@ package me.chnu.treep.exception
 import me.chnu.treep.presentation.ApiResponse
 import mu.KotlinLogging
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
-import kotlin.Exception
 
 @RestControllerAdvice
 internal class ExceptionHandler {
