@@ -20,12 +20,6 @@ allprojects {
     repositories {
         mavenCentral()
     }
-//
-//    configurations {
-//        compileOnly {
-//            extendsFrom(configurations.annotationProcessor.get())
-//        }
-//    }
 }
 
 subprojects {
@@ -33,6 +27,12 @@ subprojects {
     apply(plugin = "kotlin-spring")
     apply(plugin = "io.spring.dependency-management")
 
+    val developmentOnly: Configuration by configurations.creating
+    configurations {
+        runtimeClasspath {
+            extendsFrom(developmentOnly)
+        }
+    }
 
     dependencies {
         // JWT 인증
@@ -50,7 +50,7 @@ subprojects {
         compileOnly("com.mysql:mysql-connector-j")
 
         // docker-compose
-        implementation("org.springframework.boot:spring-boot-docker-compose")
+        developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
     }
 
