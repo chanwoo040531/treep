@@ -9,9 +9,9 @@ import org.springframework.data.repository.findByIdOrNull
 internal class TripPlanReadService(
     private val tripPlanRepository: TripPlanRepository,
 ) {
-    fun getAll(): List<PlanDetailInfo> = tripPlanRepository.findAll().map(PlanDetailInfo::from)
-    fun get(planId: Key): PlanDetailInfo =
+    fun getAll(): List<PlanInfo> = tripPlanRepository.findAll().map(PlanInfo::from)
+    fun get(planId: Key): PlanInfo =
         tripPlanRepository.findByIdOrNull(planId)
-            ?.let(PlanDetailInfo::from)
+            ?.let(PlanInfo::from)
             ?: throw NotFoundException("여행 계획을 찾을 수 없습니다")
 }

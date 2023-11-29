@@ -9,18 +9,18 @@ import org.springframework.data.repository.findByIdOrNull
 internal class TripPlanWriteService(
     private val tripPlanRepository: TripPlanRepository,
 ) {
-    fun create(planInfo: PlanInfo) = tripPlanRepository.save(planInfo.toTripPlan())
-    fun update(planInfo: PlanInfo) {
-        val plan = tripPlanRepository.findByIdOrNull(planInfo.userId)
+    fun create(planData: PlanData) = tripPlanRepository.save(planData.toTripPlan())
+    fun update(planData: PlanData) {
+        val plan = tripPlanRepository.findByIdOrNull(planData.userId)
             ?: throw NotFoundException("여행 계획을 찾을 수 없습니다")
 
         return with(plan) {
-            title = planInfo.title
-            startDate = planInfo.startDate
-            endDate = planInfo.endDate
-            budget = planInfo.budget
+            title = planData.title
+            startDate = planData.startDate
+            endDate = planData.endDate
+            budget = planData.budget
 
-            PlanDetailInfo.from(this)
+            PlanInfo.from(this)
         }
     }
 
