@@ -3,7 +3,7 @@ package me.chnu.treep.domain.plan
 import me.chnu.treep.domain.Key
 import java.time.LocalDateTime
 
-internal data class PlanInfo(
+internal data class PlanData(
     val userId: Key,
     val title: String,
     val startDate: LocalDateTime,
@@ -19,7 +19,7 @@ internal data class PlanInfo(
     )
 }
 
-internal data class PlanDetailInfo(
+internal data class PlanInfo(
     val id: Key,
     val title: String,
     val startDate: LocalDateTime,
@@ -30,7 +30,7 @@ internal data class PlanDetailInfo(
 ) {
     companion object {
         fun from(tripPlan: TripPlan) = with(tripPlan) {
-            PlanDetailInfo(
+            PlanInfo(
                 id = id,
                 title = title,
                 startDate = startDate,

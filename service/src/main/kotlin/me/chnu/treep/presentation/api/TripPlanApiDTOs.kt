@@ -1,8 +1,8 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.Key
+import me.chnu.treep.domain.plan.PlanData
 import me.chnu.treep.domain.plan.PlanInfo
-import me.chnu.treep.domain.plan.PlanDetailInfo
 import java.time.LocalDateTime
 
 internal data class PlanRequest(
@@ -11,7 +11,7 @@ internal data class PlanRequest(
     val endDate: LocalDateTime,
     val budget: Long,
 ) {
-    fun toPlanInfo(userId: Key) = PlanInfo(
+    fun toPlanData(userId: Key) = PlanData(
         userId = userId,
         title = this.title,
         startDate = this.startDate,
@@ -30,7 +30,7 @@ internal data class PlanResponse(
     val updatedAt: LocalDateTime,
 ) {
     companion object {
-        fun from(planDetailInfo: PlanDetailInfo) = with(planDetailInfo) {
+        fun from(planInfo: PlanInfo) = with(planInfo) {
             PlanResponse(
                 id = id,
                 title = title,
