@@ -1,0 +1,21 @@
+### 회원가입
+POST http://localhost:9090/api/v1/users/signup
+Content-Type: application/json
+
+{
+  "username": "테스터2",
+  "password": "12345"
+}
+
+### 로그인
+POST http://localhost:9090/api/v1/users/signin
+Content-Type: application/json
+
+{
+  "username": "테스터2",
+  "password": "12345"
+}
+
+### 조회
+GET http://localhost:9090/api/v1/users/info
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqYXJhIiwic3ViIjoiYXV0aCIsImlhdCI6MTcwMTIxNjE3MywiZXhwIjoxNzAxMjE5NzczLCJ1c2VySWQiOjEsInVzZXJuYW1lIjoi7YWM7Iqk7YSwMiJ9.nS9YTzJC2CwvIStMZz9N5eq_WyBbuNGbZ4JmqGk0ATE
