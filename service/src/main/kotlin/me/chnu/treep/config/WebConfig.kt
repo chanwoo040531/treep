@@ -1,5 +1,9 @@
 package me.chnu.treep.config
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.coroutines.runBlocking
+import me.chnu.treep.exception.UnauthorizedException
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
@@ -7,6 +11,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.context.request.NativeWebRequest
 import org.springframework.web.method.support.HandlerMethodArgumentResolver
 import org.springframework.web.method.support.ModelAndViewContainer
+import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.awaitBody
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
 
 @Configuration
@@ -21,7 +27,9 @@ internal class WebConfig(
 }
 
 @Component
-internal class AuthUserHandlerArgumentResolver : HandlerMethodArgumentResolver {
+internal class AuthUserHandlerArgumentResolver(
+    @Value("\${service.auth.url}") val authUrl: String
+) : HandlerMethodArgumentResolver {
     override fun supportsParameter(parameter: MethodParameter): Boolean =
         AuthUser::class.java.isAssignableFrom(parameter.parameterType)
 
@@ -31,15 +39,23 @@ internal class AuthUserHandlerArgumentResolver : HandlerMethodArgumentResolver {
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
     ): Any? {
-        return AuthUser(
-            userId = 1,
-            username = "테스트",
-        )
+        val authHeader: String = webRequest.getHeader("Authorization")
+            ?: throw UnauthorizedException()
+
+        return runBlocking {
+            WebClient.create()
+                .get()
+                .uri(authUrl)
+                .header("Authorization", authHeader)
+                .retrieve()
+                .awaitBody<AuthUser>()
+        }
     }
 
 }
 
 data class AuthUser (
+    @JsonProperty("id")
     val userId: Long,
     val username: String,
 )
