@@ -13,13 +13,13 @@ typealias Key = Long
 abstract class BaseEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Key = 0L,
+    open val id: Key = 0L,
 
     @CreatedDate
-    var createdAt: LocalDateTime? = null,
+    open var createdAt: LocalDateTime? = null,
 
     @LastModifiedDate
-    var updatedAt: LocalDateTime? = null,
+    open var updatedAt: LocalDateTime? = null,
 ) {
     override fun hashCode(): Int {
         return id.hashCode()
