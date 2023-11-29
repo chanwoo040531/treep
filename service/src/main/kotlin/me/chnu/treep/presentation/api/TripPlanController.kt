@@ -6,6 +6,7 @@ import me.chnu.treep.domain.plan.TripPlan
 import me.chnu.treep.domain.plan.TripPlanReadService
 import me.chnu.treep.domain.plan.TripPlanWriteService
 import me.chnu.treep.presentation.ApiResponse
+import me.chnu.treep.util.toURI
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.net.URI
 
 @RestController
 @RequestMapping("/api/v1/plans")
@@ -29,8 +29,8 @@ internal class TripPlanController(
         authUser: AuthUser,
         @RequestBody request: PlanRequest,
     ): ResponseEntity<ApiResponse<TripPlan>> {
-        val response = tripPlanWriteService.create(request.toPlanInfo(userId = authUser.userId))
-        return ResponseEntity.created(URI.create("/api/v1/plans/${authUser.userId}"))
+        val response = tripPlanWriteService.create(request.toPlanData(userId = authUser.userId))
+        return ResponseEntity.created("/api/v1/plans/${authUser.userId}".toURI())
             .body(ApiResponse.success(response))
     }
 
@@ -57,7 +57,7 @@ internal class TripPlanController(
         @PathVariable(value = "plan-id") planId: Key,
         @RequestBody request: PlanRequest,
     ): ResponseEntity<Unit> {
-        tripPlanWriteService.update(request.toPlanInfo(userId = authUser.userId))
+        tripPlanWriteService.update(request.toPlanData(userId = authUser.userId))
         return ResponseEntity.noContent().build()
     }
 
