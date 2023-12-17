@@ -24,6 +24,10 @@ internal class TripPlanController(
     private val tripPlanReadService: TripPlanReadService,
 ) {
 
+    /**
+     * 이 부분은 제가 예전에 말했었던 부분이네요
+     * 프론트 개발자를 구했으니 성공 후 redirect 에 대한 부분은 프론트에게 맏기는게 어떨까요?
+     */
     @PostMapping
     fun create(
         authUser: AuthUser,
@@ -34,6 +38,7 @@ internal class TripPlanController(
             .body(ApiResponse.success(response))
     }
 
+    // ResponseEntity 를 지양해볼 생각은... 아직 없으신가요...? 아래는 depth 가 너무 깊네요 ㅋㅋㅋㅋ
     @GetMapping
     fun getAll(
         authUser: AuthUser,

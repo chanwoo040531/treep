@@ -2,6 +2,7 @@ package me.chnu.treep.exception
 
 import java.lang.RuntimeException
 
+// 매개변수가 message 하나일 땐 named argument 를 사용안해도 괜찮을거 같아요
 internal sealed class ServerException(
     override val message: String,
 ) : RuntimeException(message)
