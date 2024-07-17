@@ -6,20 +6,11 @@ import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
-typealias Key = Long
-
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener::class)
 abstract class BaseEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open val id: Key = 0L,
-
-    @CreatedDate
-    open var createdAt: LocalDateTime? = null,
-
-    @LastModifiedDate
-    open var updatedAt: LocalDateTime? = null,
+    open val id: Long = 0L,
 ) {
     override fun hashCode(): Int {
         return id.hashCode()

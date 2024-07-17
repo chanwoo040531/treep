@@ -7,7 +7,7 @@ service:
 
 spring:
   datasource:
-    url: jdbc:mysql://mysql:3306/treep
+    url: jdbc:mysql://mysql:33061/treep
     username: root
     password: 2122
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,11 +19,14 @@ spring:
     properties:
       hibernate:
         show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
   docker:
     compose:
       start:
         log-level: debug
+      file: R:\ProjectRepositories\Java\SMF\treep\service\docker-compose.yaml
 logging:
   level:
-    root: debug
-#        dialect: org.hibernate.dialect.MySQLDialect
+    web: info
+    org.springframework:
+      boot: info
