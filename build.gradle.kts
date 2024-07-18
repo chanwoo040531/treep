@@ -40,9 +40,6 @@ subprojects {
 
         // Kotlin Logging
         implementation("io.github.microutils:kotlin-logging:1.12.5")
-
-        // MySQL
-        compileOnly("com.mysql:mysql-connector-j")
     }
 
     dependencyManagement {

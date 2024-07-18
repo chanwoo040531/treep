@@ -7,24 +7,33 @@ service:
 
 spring:
   datasource:
-    url: jdbc:mysql://mysql:33061/treep
-    username: root
-    password: 2122
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:54321/treep
+    username: postgres
+    password: password
+
+  data:
+    redis:
+      host: localhost
+      port: 63791
 
   jpa:
-    hibernate:
-      ddl-auto: update
-
+    show-sql: true
     properties:
       hibernate:
-        show_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        check_nullability: true
+        validator:
+          apply_to_ddl: true
+
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
   docker:
     compose:
       start:
         log-level: debug
-      file: R:\ProjectRepositories\Java\SMF\treep\service\docker-compose.yaml
+      file: classpath:docker-compose.yml
 logging:
   level:
     web: info
