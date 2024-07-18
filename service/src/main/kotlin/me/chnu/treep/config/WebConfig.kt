@@ -39,17 +39,19 @@ internal class AuthUserHandlerArgumentResolver(
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
     ): Any? {
-        val authHeader: String = webRequest.getHeader("Authorization")
-            ?: throw UnauthorizedException()
+        return AuthUser(userId = 1, username = "tester@test.com")
 
-        return runBlocking {
-            WebClient.create()
-                .get()
-                .uri(authUrl)
-                .header("Authorization", authHeader)
-                .retrieve()
-                .awaitBody<AuthUser>()
-        }
+//        val authHeader: String = webRequest.getHeader("Authorization")
+//            ?: throw UnauthorizedException()
+//
+//        return runBlocking {
+//            WebClient.create()
+//                .get()
+//                .uri(authUrl)
+//                .header("Authorization", authHeader)
+//                .retrieve()
+//                .awaitBody<AuthUser>()
+//        }
     }
 
 }

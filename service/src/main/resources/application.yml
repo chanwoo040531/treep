@@ -28,12 +28,19 @@ spring:
 
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
 
   docker:
     compose:
       start:
         log-level: debug
       file: classpath:docker-compose.yml
+
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+
 logging:
   level:
     web: info

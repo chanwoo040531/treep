@@ -22,12 +22,12 @@ internal class ItineraryRequest(
 }
 
 internal class ItineraryResponse(
-    private val id: Long,
-    private val tripPlanId: Long,
-    private val title: String,
-    private val cost: Long,
-    private val startAt: LocalDateTime,
-    private val endAt: LocalDateTime,
+    val id: Long,
+    val tripPlanId: Long,
+    val title: String,
+    val cost: Long,
+    val startAt: LocalDateTime,
+    val endAt: LocalDateTime,
 ) {
     companion object {
         fun from(itinerary: Itinerary) = with(itinerary) {
