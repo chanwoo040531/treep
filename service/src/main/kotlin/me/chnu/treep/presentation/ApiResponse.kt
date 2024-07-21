@@ -1,7 +1,7 @@
 package me.chnu.treep.presentation
 
 internal class ApiResponse<T>(
-    val message: String? = "",
+    val message: String? = null,
     val body: T? = null,
 ) {
     companion object {

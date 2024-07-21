@@ -8,6 +8,7 @@ import java.util.*
 typealias JwtToken = String
 
 internal object JwtManager {
+    // 뒤에 단언 연산자 붙히라고 노란줄 그이네요... ㅋㅋㅋ
     fun createToken(claim: JwtClaim, properties: JwtProperties) =
         JWT.create()
             .withIssuer(properties.issuer)

@@ -1,49 +1,35 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.config.AuthUser
-import me.chnu.treep.domain.Key
 import me.chnu.treep.domain.itinerary.ItineraryReadService
-import me.chnu.treep.domain.itinerary.ItineraryRepository
 import me.chnu.treep.domain.itinerary.ItineraryWriteService
 import me.chnu.treep.presentation.ApiResponse
+import me.chnu.treep.util.toURI
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/v1/plans/{plan-id}/itineraries")
+@RequestMapping("/v1/plans/{plan-id}/itineraries")
 internal class ItineraryController(
     private val itineraryReadService: ItineraryReadService,
     private val itineraryWriteService: ItineraryWriteService,
 ) {
-    @PostMapping("/dining")
-    fun createDiningItinerary(
+    @PostMapping
+    fun create(
         authUser: AuthUser,
-        @PathVariable(value = "plan-id") planId: Key,
-        @RequestBody request: DiningRequest,
-    ): ResponseEntity<Unit> {
-        itineraryWriteService.createItinerary(itineraryData = request.toItineraryData(planId))
-        return ResponseEntity.noContent().build()
-    }
+        @PathVariable(value = "plan-id") planId: Long,
+        @RequestBody request: ItineraryRequest,
+    ): ResponseEntity<ApiResponse<String>> {
+        request.toItinerary().let(itineraryWriteService::create)
 
-    @PostMapping("/stay")
-    fun createStayItinerary(
-        authUser: AuthUser,
-        @PathVariable(value = "plan-id") planId: Key,
-        @RequestBody request: StayRequest,
-    ): ResponseEntity<Unit> {
-        itineraryWriteService.createItinerary(itineraryData = request.toItineraryData(planId))
-        return ResponseEntity.noContent().build()
+        return ResponseEntity.created("/v1/plans/${authUser.userId}".toURI())
+            .body(ApiResponse.success("일정이 생성되었습니다"))
     }
 
     @GetMapping
     fun getAll(
         authUser: AuthUser,
-        @PathVariable(value = "plan-id") planId: Key,
+        @PathVariable(value = "plan-id") planId: Long,
     ): ResponseEntity<ApiResponse<List<ItineraryResponse>>> {
         val response = itineraryReadService.getAll(planId)
             .map(ItineraryResponse::from)

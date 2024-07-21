@@ -23,17 +23,12 @@ allprojects {
 }
 
 subprojects {
+    apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-spring")
+
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "kotlin-kapt")
-
-    val developmentOnly: Configuration by configurations.creating
-    configurations {
-        runtimeClasspath {
-            extendsFrom(developmentOnly)
-        }
-    }
 
     dependencies {
         // JWT 인증
@@ -41,23 +36,24 @@ subprojects {
 
         // Kotlin
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+//        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
         // Kotlin Logging
         implementation("io.github.microutils:kotlin-logging:1.12.5")
-
-
-        // MySQL
-        compileOnly("com.mysql:mysql-connector-j")
-
-        // docker-compose
-        developmentOnly("org.springframework.boot:spring-boot-docker-compose")
-
     }
 
     dependencyManagement {
         imports {
             mavenBom(SpringBootPlugin.BOM_COORDINATES)
+        }
+    }
+
+    val developmentOnly by configurations.creating
+    configurations {
+        runtimeClasspath {
+            extendsFrom(developmentOnly)
         }
     }
 }

@@ -1,8 +1,7 @@
-package me.chnu.treep.domain.itinerary.entity
+package me.chnu.treep.domain.plan.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
-import jakarta.persistence.MappedSuperclass
 import jakarta.persistence.Table
 import me.chnu.treep.domain.BaseEntity
 import org.springframework.data.annotation.CreatedDate
@@ -11,16 +10,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "itineraries")
+@Table(name = "trip_plans")
 @EntityListeners(AuditingEntityListener::class)
-internal class Itinerary(
-    val tripPlanId: Long,
+internal class TripPlan(
     var title: String,
-    var description: String,
-    var cost: Long,
-    var startAt: LocalDateTime,
-    var endAt: LocalDateTime,
+    var startDate: LocalDateTime,
+    var endDate: LocalDateTime,
+    var budget: Long,
+    val userId: Long,
 ) : BaseEntity() {
+
     @CreatedDate
     lateinit var createdAt: LocalDateTime
 

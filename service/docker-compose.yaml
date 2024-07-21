@@ -7,11 +7,12 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: treep
+      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: 2122
     ports:
-      - "3306:3306"
+      - "33061:3306"
 
   redis:
     image: redis
     ports:
-      - "6379:6379"
+      - "63791:6379"
