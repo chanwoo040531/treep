@@ -21,7 +21,6 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         check_nullability: true
         validator:
           apply_to_ddl: true
@@ -30,19 +29,17 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+    open-in-view: true
 
   docker:
     compose:
       start:
         log-level: debug
-      file: classpath:docker-compose.yml
-
-  jackson:
-    serialization:
-      write_dates_as_timestamps: false
 
 logging:
   level:
+    me.chnu: debug
     web: info
     org.springframework:
       boot: info
+    com.fasterxml.jackson: debug
