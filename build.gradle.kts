@@ -35,8 +35,6 @@ subprojects {
         implementation("com.auth0:java-jwt:4.4.0")
 
         // Kotlin
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-//        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
