@@ -24,17 +24,22 @@ spring:
         check_nullability: true
         validator:
           apply_to_ddl: true
+        jdbc.lob.non_contextual_creation: true
 
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: true
 
   docker:
     compose:
       start:
         log-level: debug
+
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
 
 logging:
   level:
