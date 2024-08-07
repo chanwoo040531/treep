@@ -1,5 +1,6 @@
 package me.chnu.treep.presentation.api
 
+import me.chnu.treep.application.PlanItineraryUseCase
 import me.chnu.treep.config.AuthUser
 import me.chnu.treep.domain.itinerary.ItineraryReadService
 import me.chnu.treep.domain.itinerary.ItineraryWriteService
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1/plans/{plan-id}/itineraries")
 internal class ItineraryController(
     private val itineraryReadService: ItineraryReadService,
-    private val itineraryWriteService: ItineraryWriteService,
+    private val planItineraryUseCase: PlanItineraryUseCase,
 ) {
     @PostMapping
     fun create(
@@ -20,7 +21,7 @@ internal class ItineraryController(
         @PathVariable(value = "plan-id") planId: Long,
         @RequestBody request: ItineraryRequest,
     ): ResponseEntity<ApiResponse<String>> {
-        request.toItinerary().let(itineraryWriteService::create)
+        planItineraryUseCase.saveItinerary(planId, request)
 
         return ResponseEntity.created("/v1/plans/${authUser.userId}".toURI())
             .body(ApiResponse.success("일정이 생성되었습니다"))

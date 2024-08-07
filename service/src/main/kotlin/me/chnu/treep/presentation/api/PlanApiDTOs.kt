@@ -7,7 +7,7 @@ internal data class PlanRequest(
     val title: String,
     val startDate: ZonedDateTime,
     val endDate: ZonedDateTime,
-    val budget: Long,
+    val budget: Double,
 ) {
     fun toPlan(userId: Long) = Plan(
         userId = userId,
@@ -23,7 +23,7 @@ internal data class PlanResponse(
     val title: String,
     val startDate: ZonedDateTime,
     val endDate: ZonedDateTime,
-    val budget: Long,
+    val budget: Double,
     val createdAt: ZonedDateTime,
     val lastUpdatedAt: ZonedDateTime,
 ) {

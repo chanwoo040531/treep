@@ -1,18 +1,18 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.itinerary.entity.Itinerary
+import me.chnu.treep.domain.plan.entity.Plan
 import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
-    private val tripPlanId: Long,
     private val title: String,
-    private val cost: Long,
+    private val cost: Double,
     private val startAt: ZonedDateTime,
     private val endAt: ZonedDateTime,
     private val description: String,
 ) {
-    fun toItinerary() = Itinerary(
-        tripPlanId = tripPlanId,
+    fun toItinerary(plan: Plan) = Itinerary(
+        plan = plan,
         title = title,
         cost = cost,
         startAt = startAt,
@@ -23,9 +23,8 @@ internal class ItineraryRequest(
 
 internal class ItineraryResponse(
     val id: Long,
-    val tripPlanId: Long,
     val title: String,
-    val cost: Long,
+    val cost: Double,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
 ) {
@@ -33,7 +32,6 @@ internal class ItineraryResponse(
         fun from(itinerary: Itinerary) = with(itinerary) {
             ItineraryResponse(
                 id = id,
-                tripPlanId = tripPlanId,
                 title = title,
                 cost = cost,
                 startAt = startAt,
