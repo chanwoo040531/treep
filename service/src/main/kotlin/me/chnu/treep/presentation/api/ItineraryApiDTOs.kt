@@ -2,13 +2,14 @@ package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.itinerary.entity.Itinerary
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
     private val tripPlanId: Long,
     private val title: String,
     private val cost: Long,
-    private val startAt: LocalDateTime,
-    private val endAt: LocalDateTime,
+    private val startAt: ZonedDateTime,
+    private val endAt: ZonedDateTime,
     private val description: String,
 ) {
     fun toItinerary() = Itinerary(
@@ -26,8 +27,8 @@ internal class ItineraryResponse(
     val tripPlanId: Long,
     val title: String,
     val cost: Long,
-    val startAt: LocalDateTime,
-    val endAt: LocalDateTime,
+    val startAt: ZonedDateTime,
+    val endAt: ZonedDateTime,
 ) {
     companion object {
         fun from(itinerary: Itinerary) = with(itinerary) {
