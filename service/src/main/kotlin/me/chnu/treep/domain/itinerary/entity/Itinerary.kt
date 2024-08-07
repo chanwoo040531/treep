@@ -1,6 +1,6 @@
 package me.chnu.treep.domain.itinerary.entity
 
-aimport jakarta.persistence.*
+import jakarta.persistence.*
 import me.chnu.treep.domain.BaseEntity
 import me.chnu.treep.domain.plan.entity.Plan
 import org.springframework.data.annotation.CreatedDate
