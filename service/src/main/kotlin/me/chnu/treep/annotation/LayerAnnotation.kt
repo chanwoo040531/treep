@@ -8,19 +8,19 @@ import org.springframework.transaction.annotation.Transactional
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 @Component
-annotation class UseCase(@get:AliasFor(annotation = Component::class) val value: String = "")
+internal annotation class UseCase(@get:AliasFor(annotation = Component::class) val value: String = "")
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 @Component
 @Transactional(readOnly = true)
-annotation class ReadService(@get:AliasFor(annotation = Component::class) val value: String = "")
+internal annotation class ReadService(@get:AliasFor(annotation = Component::class) val value: String = "")
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 @Component
 @Transactional(readOnly = false)
-annotation class WriteService(@get:AliasFor(annotation = Component::class) val value: String = "")
+internal annotation class WriteService(@get:AliasFor(annotation = Component::class) val value: String = "")
 
