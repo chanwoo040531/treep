@@ -3,8 +3,9 @@ apply(plugin = "kotlin-jpa")
 dependencies {
     // Spring
     implementation(libs.spring.boot.web)
-    testImplementation(libs.spring.boot.test)
     implementation(libs.spring.boot.actuator)
+    implementation(libs.spring.boot.validation)
+    testImplementation(libs.spring.boot.test)
 
     // Database
     implementation(libs.spring.boot.data.jpa)
