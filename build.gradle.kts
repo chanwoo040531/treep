@@ -35,8 +35,8 @@ subprojects {
         implementation("com.auth0:java-jwt:4.4.0")
 
         // Kotlin
-        implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.25")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.25")
 
         // Kotlin Logging
         implementation("io.github.microutils:kotlin-logging:1.12.5")
