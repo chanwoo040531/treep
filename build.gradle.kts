@@ -2,11 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id("org.springframework.boot") version "3.3.2" apply false
-    id("io.spring.dependency-management") version "1.1.6"
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
-    kotlin("plugin.jpa") version "1.8.22"
+    alias(libs.plugins.spring.boot) apply false
+    alias(libs.plugins.spring.dependencymanagement)
+
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.kotlin.jpa)
 }
 
 java {
@@ -31,15 +32,12 @@ subprojects {
     apply(plugin = "kotlin-kapt")
 
     dependencies {
-        // JWT 인증
-        implementation("com.auth0:java-jwt:4.4.0")
-
         // Kotlin
-        implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.25")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.25")
+        implementation(rootProject.libs.kotlin.stdlib)
+        implementation(rootProject.libs.kotlin.reflect)
 
         // Kotlin Logging
-        implementation("io.github.microutils:kotlin-logging:1.12.5")
+        implementation(rootProject.libs.kotlinlogging)
     }
 
     dependencyManagement {

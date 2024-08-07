@@ -1,0 +1,49 @@
+[versions]
+kotlin = "1.9.25"
+spring-boot = "3.3.2"
+jackson = "2.15.0"
+flyway = "10.12.0"
+
+[plugins]
+## Kotlin
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+
+## Spring Boot
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependencymanagement = { id = "io.spring.dependency-management", version = "1.1.6" }
+
+[bundles]
+kotest = ["kotest-core", "kotest-junit5", "kotest-property"]
+
+[libraries]
+## Kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+
+## Spring Boot
+spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
+spring-boot-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator", version.ref = "spring-boot" }
+spring-boot-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
+spring-boot-dockercompose = { group = "org.springframework.boot", name = "spring-boot-docker-compose", version.ref = "spring-boot" }
+
+## Jackson
+jackson-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
+jackson-jsr310 = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jackson" }
+
+## Flyway
+flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "flyway" }
+flyway-postgres = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
+
+## Kotest
+kotest-core = { group = "io.kotest", name = "kotest-assertions-core", version = "5.9.0" }
+kotest-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version = "5.9.0" }
+kotest-property = { group = "io.kotest", name = "kotest-property", version = "5.9.0" }
+
+## PostgreSQL
+postgresql = { group = "org.postgresql", name = "postgresql", version = "42.7.2" }
+
+## Logging
+kotlinlogging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "5.1.4" }

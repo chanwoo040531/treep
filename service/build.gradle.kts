@@ -1,34 +1,27 @@
 apply(plugin = "kotlin-jpa")
 
-val bootVersion = "3.3.2"
-val jacksonVersion = "2.15.0"
-val kotestVersion = "5.9.0"
-val flywayVersion = "10.12.0"
-
 dependencies {
     // Spring
-    implementation("org.springframework.boot:spring-boot-starter-web:$bootVersion")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:$bootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-actuator:$bootVersion")
+    implementation(libs.spring.boot.web)
+    testImplementation(libs.spring.boot.test)
+    implementation(libs.spring.boot.actuator)
 
     // Database
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$bootVersion")
-    runtimeOnly("org.postgresql:postgresql:42.7.2")
+    implementation(libs.spring.boot.data.jpa)
+    runtimeOnly(libs.postgresql)
 
-    implementation("org.flywaydb:flyway-core:$flywayVersion")
-    implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
+    implementation(libs.flyway.core)
+    implementation(libs.flyway.postgres)
 
     // Docker
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose:$bootVersion")
+    developmentOnly(libs.spring.boot.dockercompose)
 
     // Serialization
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation(libs.jackson.kotlin)
+    implementation(libs.jackson.jsr310)
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-    testImplementation("io.kotest:kotest-property:$kotestVersion")
+    testImplementation(libs.bundles.kotest)
 }
 
 tasks.withType<Test>().configureEach {
