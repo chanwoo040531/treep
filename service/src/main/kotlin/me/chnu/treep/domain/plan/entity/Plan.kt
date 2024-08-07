@@ -8,21 +8,22 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "trip_plans")
+@Table(name = "plans")
 @EntityListeners(AuditingEntityListener::class)
-internal class TripPlan(
+internal class Plan(
     var title: String,
-    var startDate: LocalDateTime,
-    var endDate: LocalDateTime,
+    var startDate: ZonedDateTime,
+    var endDate: ZonedDateTime,
     var budget: Long,
     val userId: Long,
 ) : BaseEntity() {
 
     @CreatedDate
-    lateinit var createdAt: LocalDateTime
+    lateinit var createdAt: ZonedDateTime
 
     @LastModifiedDate
-    lateinit var lastUpdatedAt: LocalDateTime
+    lateinit var lastUpdatedAt: ZonedDateTime
 }

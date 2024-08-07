@@ -1,15 +1,15 @@
 package me.chnu.treep.presentation.api
 
-import me.chnu.treep.domain.plan.entity.TripPlan
-import java.time.LocalDateTime
+import me.chnu.treep.domain.plan.entity.Plan
+import java.time.ZonedDateTime
 
 internal data class PlanRequest(
     val title: String,
-    val startDate: LocalDateTime,
-    val endDate: LocalDateTime,
+    val startDate: ZonedDateTime,
+    val endDate: ZonedDateTime,
     val budget: Long,
 ) {
-    fun toPlan(userId: Long) = TripPlan(
+    fun toPlan(userId: Long) = Plan(
         userId = userId,
         title = this.title,
         startDate = this.startDate,
@@ -21,14 +21,14 @@ internal data class PlanRequest(
 internal data class PlanResponse(
     val id: Long,
     val title: String,
-    val startDate: LocalDateTime,
-    val endDate: LocalDateTime,
+    val startDate: ZonedDateTime,
+    val endDate: ZonedDateTime,
     val budget: Long,
-    val createdAt: LocalDateTime,
-    val lastUpdatedAt: LocalDateTime,
+    val createdAt: ZonedDateTime,
+    val lastUpdatedAt: ZonedDateTime,
 ) {
     companion object {
-        fun from(tripPlan: TripPlan) = with(tripPlan) {
+        fun from(plan: Plan) = with(plan) {
             PlanResponse(
                 id = id,
                 title = title,
