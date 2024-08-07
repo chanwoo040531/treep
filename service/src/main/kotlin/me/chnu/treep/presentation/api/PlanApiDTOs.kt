@@ -5,15 +5,15 @@ import java.time.ZonedDateTime
 
 internal data class PlanRequest(
     val title: String,
-    val startDate: ZonedDateTime,
-    val endDate: ZonedDateTime,
+    val startAt: ZonedDateTime,
+    val endAt: ZonedDateTime,
     val budget: Double,
 ) {
     fun toPlan(userId: Long) = Plan(
         userId = userId,
         title = this.title,
-        startDate = this.startDate,
-        endDate = this.endDate,
+        startAt = this.startAt,
+        endAt = this.endAt,
         budget = this.budget,
     )
 }
@@ -21,8 +21,8 @@ internal data class PlanRequest(
 internal data class PlanResponse(
     val id: Long,
     val title: String,
-    val startDate: ZonedDateTime,
-    val endDate: ZonedDateTime,
+    val startAt: ZonedDateTime,
+    val endAt: ZonedDateTime,
     val budget: Double,
     val createdAt: ZonedDateTime,
     val lastUpdatedAt: ZonedDateTime,
@@ -32,8 +32,8 @@ internal data class PlanResponse(
             PlanResponse(
                 id = id,
                 title = title,
-                startDate = startDate,
-                endDate = endDate,
+                startAt = startAt,
+                endAt = endAt,
                 budget = budget,
                 createdAt = createdAt,
                 lastUpdatedAt = lastUpdatedAt,

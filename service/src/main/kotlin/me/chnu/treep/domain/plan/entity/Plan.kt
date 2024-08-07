@@ -15,8 +15,8 @@ import java.time.ZonedDateTime
 @EntityListeners(AuditingEntityListener::class)
 internal class Plan(
     var title: String,
-    var startDate: ZonedDateTime,
-    var endDate: ZonedDateTime,
+    var startAt: ZonedDateTime,
+    var endAt: ZonedDateTime,
     var budget: Double,
     @NotNull
     val userId: Long,
