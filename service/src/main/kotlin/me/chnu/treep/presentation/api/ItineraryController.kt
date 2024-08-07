@@ -36,4 +36,15 @@ internal class ItineraryController(
 
         return ResponseEntity.ok(ApiResponse.success(response))
     }
+
+    @GetMapping("/{itinerary-id}")
+    fun get(
+        @PathVariable(value = "plan-id") planId: Long,
+        @PathVariable(value = "itinerary-id") itineraryId: Long,
+    ): ResponseEntity<ApiResponse<ItineraryResponse>> {
+        val response = itineraryReadService.get(itineraryId)
+            .let(ItineraryResponse::from)
+
+        return ResponseEntity.ok(ApiResponse.success(response))
+    }
 }
