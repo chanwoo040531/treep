@@ -8,8 +8,8 @@ val flywayVersion = "10.12.0"
 dependencies {
     // Spring
     implementation("org.springframework.boot:spring-boot-starter-web:$bootVersion")
-    testImplementation("org.springframework.boot:spring-boot-starter-test$bootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-actuator$bootVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$bootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:$bootVersion")
 
     // Database
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$bootVersion")
