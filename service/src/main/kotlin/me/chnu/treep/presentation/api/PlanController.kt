@@ -1,6 +1,5 @@
 package me.chnu.treep.presentation.api
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import me.chnu.treep.config.AuthUser
 import me.chnu.treep.domain.plan.PlanReadService
 import me.chnu.treep.domain.plan.PlanWriteService

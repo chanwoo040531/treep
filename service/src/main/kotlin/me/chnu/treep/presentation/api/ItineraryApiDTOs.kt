@@ -1,7 +1,6 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.itinerary.entity.Itinerary
-import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
