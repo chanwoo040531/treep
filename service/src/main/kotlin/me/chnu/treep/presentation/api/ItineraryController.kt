@@ -30,21 +30,19 @@ internal class ItineraryController(
     fun getAll(
         authUser: AuthUser,
         @PathVariable(value = "plan-id") planId: Long,
-    ): ResponseEntity<ApiResponse<List<ItineraryResponse>>> {
-        val response = itineraryReadService.getAll(planId)
+    ): ResponseEntity<ApiResponse<List<ItineraryResponse>>> =
+        itineraryReadService.getAll(planId)
             .map(ItineraryResponse::from)
-
-        return ResponseEntity.ok(ApiResponse.success(response))
-    }
+            .let { ApiResponse.success(it) }
+            .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{itinerary-id}")
     fun get(
         @PathVariable(value = "plan-id") planId: Long,
         @PathVariable(value = "itinerary-id") itineraryId: Long,
-    ): ResponseEntity<ApiResponse<ItineraryResponse>> {
-        val response = itineraryReadService.get(itineraryId)
+    ): ResponseEntity<ApiResponse<ItineraryResponse>> =
+        itineraryReadService.get(itineraryId)
             .let(ItineraryResponse::from)
-
-        return ResponseEntity.ok(ApiResponse.success(response))
-    }
+            .let { ApiResponse.success(it) }
+            .let { ResponseEntity.ok(it) }
 }

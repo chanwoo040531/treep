@@ -27,14 +27,16 @@ internal class PlanController(
     }
 
     @GetMapping
-    fun getAll(): ResponseEntity<ApiResponse<List<PlanResponse>>> {
-        val response = planReadService.getAll().map(PlanResponse::from)
-        return ResponseEntity.ok(ApiResponse.success(response))
-    }
+    fun getAll(): ResponseEntity<ApiResponse<List<PlanResponse>>> =
+        planReadService.getAll()
+            .map(PlanResponse::from)
+            .let { ApiResponse.success(it) }
+            .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{plan-id}")
-    fun get(@PathVariable(value = "plan-id") planId: Long): ResponseEntity<ApiResponse<PlanResponse>> {
-        val response = PlanResponse.from(planReadService.get(planId))
-        return ResponseEntity.ok(ApiResponse.success(response))
-    }
+    fun get(@PathVariable(value = "plan-id") planId: Long): ResponseEntity<ApiResponse<PlanResponse>> =
+        planReadService.get(planId)
+            .let(PlanResponse::from)
+            .let { ApiResponse.success(it) }
+            .let { ResponseEntity.ok(it) }
 }
