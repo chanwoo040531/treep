@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 @Entity
 @Table(name = "itineraries")
@@ -18,12 +19,12 @@ internal class Itinerary(
     var title: String,
     var description: String,
     var cost: Long,
-    var startAt: LocalDateTime,
-    var endAt: LocalDateTime,
+    var startAt: ZonedDateTime,
+    var endAt: ZonedDateTime,
 ) : BaseEntity() {
     @CreatedDate
-    lateinit var createdAt: LocalDateTime
+    lateinit var createdAt: ZonedDateTime
 
     @LastModifiedDate
-    lateinit var lastUpdatedAt: LocalDateTime
+    lateinit var lastUpdatedAt: ZonedDateTime
 }
