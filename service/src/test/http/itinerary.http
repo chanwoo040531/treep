@@ -1,0 +1,18 @@
+### Post Itinerary
+POST http://localhost:8080/v1/plans/1/itineraries
+Content-Type: application/json
+
+{
+  "tripPlanId": 1,
+  "title":"아침밥",
+  "cost": 10000,
+  "startAt":"2024-05-31T09:30:00",
+  "endAt": "2024-05-31T10:30:00",
+  "description":"아침밥 먹기"
+}
+
+### Get Itineraries
+GET http://localhost:8080/v1/plans/1/itineraries
+
+### Get Itinerary
+GET http://localhost:8080/v1/plans/1/itineraries/1
