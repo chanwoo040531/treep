@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/v1/plans/{plan-id}/itineraries")
 internal class ItineraryController(
-    private val itineraryReadService: ItineraryReadService,
     private val planItineraryUseCase: PlanItineraryUseCase,
+    private val itineraryReadService: ItineraryReadService,
 ) {
     @PostMapping
     fun create(
