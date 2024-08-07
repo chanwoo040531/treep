@@ -3,6 +3,7 @@ kotlin = "1.9.25"
 spring-boot = "3.3.2"
 jackson = "2.15.0"
 flyway = "10.12.0"
+kotest = "5.9.0"
 
 [plugins]
 ## Kotlin
@@ -38,9 +39,9 @@ flyway-core = { group = "org.flywaydb", name = "flyway-core", version.ref = "fly
 flyway-postgres = { group = "org.flywaydb", name = "flyway-database-postgresql", version.ref = "flyway" }
 
 ## Kotest
-kotest-core = { group = "io.kotest", name = "kotest-assertions-core", version = "5.9.0" }
-kotest-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version = "5.9.0" }
-kotest-property = { group = "io.kotest", name = "kotest-property", version = "5.9.0" }
+kotest-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotest-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
 
 ## PostgreSQL
 postgresql = { group = "org.postgresql", name = "postgresql", version = "42.7.2" }
