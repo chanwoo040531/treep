@@ -10,7 +10,7 @@ import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "itineraries")
+@Table(schema = "plan", name = "itineraries")
 @EntityListeners(AuditingEntityListener::class)
 internal class Itinerary(
     var title: String,
