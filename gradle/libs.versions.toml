@@ -10,6 +10,7 @@ kotest = "5.9.0"
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+flyway = { id = "org.flywaydb.flyway", version.ref = "flyway" }
 
 ## Spring Boot
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
@@ -27,9 +28,11 @@ kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", vers
 spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring-boot" }
 spring-boot-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
 spring-boot-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator", version.ref = "spring-boot" }
-spring-boot-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
 spring-boot-dockercompose = { group = "org.springframework.boot", name = "spring-boot-docker-compose", version.ref = "spring-boot" }
 spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation", version.ref = "spring-boot" }
+
+spring-boot-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
+spring-boot-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis", version.ref = "spring-boot" }
 
 ## Jackson
 jackson-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
