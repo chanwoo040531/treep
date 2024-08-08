@@ -42,7 +42,7 @@ internal class ExceptionHandler {
             ex,
             HttpStatus.INTERNAL_SERVER_ERROR,
             "Internal Server Error"
-        ).also { logger.error { ex.message } }
+        ).also { logger.error(ex) { ex.message } }
 
     fun responseEntity(
         ex: Throwable,
