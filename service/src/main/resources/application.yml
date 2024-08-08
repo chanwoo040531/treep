@@ -44,7 +44,6 @@ spring:
 logging:
   level:
     me.chnu: debug
-    web: info
     org.springframework:
       boot: info
     com.fasterxml.jackson: debug
