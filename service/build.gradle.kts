@@ -23,8 +23,11 @@ dependencies {
 
     // Kotest
     testImplementation(libs.bundles.kotest)
+
+    // In-memory Cache
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
 }
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
-}
+}   
