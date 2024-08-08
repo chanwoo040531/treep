@@ -1,8 +1,8 @@
-create schema if not exists treep.plan;
+create schema if not exists plan;
 
 
 -- Table: treep.plan.plans
-CREATE TABLE IF NOT EXISTS "plan.plans" (
+CREATE TABLE IF NOT EXISTS plan.plans (
     "id"              INTEGER NOT NULL UNIQUE,
     "title"           VARCHAR,
     "budget"          DECIMAL,
@@ -13,10 +13,10 @@ CREATE TABLE IF NOT EXISTS "plan.plans" (
     PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "plan.plans" IS 'trip plans';
+COMMENT ON TABLE plan.plans IS 'trip plans';
 
 -- Table: treep.plan.itineraries
-CREATE TABLE IF NOT EXISTS "plan.itineraries" (
+CREATE TABLE IF NOT EXISTS plan.itineraries (
     "id"              BIGINT NOT NULL UNIQUE,
     "plan_id"         BIGINT,
     "title"           VARCHAR,
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS "plan.itineraries" (
     PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "plan.itineraries" IS 'itineraries of plan';
+COMMENT ON TABLE plan.itineraries IS 'itineraries of plan';
 
 
-ALTER TABLE IF EXISTS "plan.itineraries"
-ADD FOREIGN KEY ("plan_id") REFERENCES "plan.plans"("id") ON UPDATE NO ACTION ON DELETE CASCADE;
+ALTER TABLE IF EXISTS plan.itineraries
+ADD FOREIGN KEY ("plan_id") REFERENCES plan.plans("id") ON UPDATE NO ACTION ON DELETE CASCADE;

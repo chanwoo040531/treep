@@ -11,7 +11,7 @@ internal class ItineraryReadService(
     private val itineraryRepository: ItineraryRepository
 ) {
     fun getAll(planId: Long): List<Itinerary> =
-        itineraryRepository.findAllByTripPlanId(planId)
+        itineraryRepository.findAllByPlanId(planId)
 
     fun get(itineraryId: Long): Itinerary =
         itineraryRepository.findByIdOrNull(itineraryId)

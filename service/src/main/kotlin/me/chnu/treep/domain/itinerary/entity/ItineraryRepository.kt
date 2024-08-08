@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 internal interface ItineraryRepository : JpaRepository<Itinerary, Long> {
 
-    fun findAllByTripPlanId(planId: Long): List<Itinerary>
+    fun findAllByPlanId(planId: Long): List<Itinerary>
 }
