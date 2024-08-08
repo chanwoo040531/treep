@@ -8,10 +8,10 @@ spring:
       port: 63791
 
   datasource:
-    url: jdbc:mysql://mysql:33061/treep
-    username: root
-    password: 2122
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:54321/treep
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
