@@ -8,6 +8,7 @@ import me.chnu.treep.domain.BaseEntity
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 @Entity
@@ -17,7 +18,7 @@ internal class Plan(
     var title: String,
     var startAt: ZonedDateTime,
     var endAt: ZonedDateTime,
-    var budget: Double,
+    var budget: BigDecimal,
     @NotNull
     val userId: Long,
 ) : BaseEntity() {

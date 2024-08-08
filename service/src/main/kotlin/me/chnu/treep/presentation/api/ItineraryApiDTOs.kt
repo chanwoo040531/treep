@@ -2,11 +2,12 @@ package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.itinerary.entity.Itinerary
 import me.chnu.treep.domain.plan.entity.Plan
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
     private val title: String,
-    private val cost: Double,
+    private val cost: BigDecimal,
     private val startAt: ZonedDateTime,
     private val endAt: ZonedDateTime,
     private val description: String,
@@ -24,7 +25,7 @@ internal class ItineraryRequest(
 internal class ItineraryResponse(
     val id: Long,
     val title: String,
-    val cost: Double,
+    val cost: BigDecimal,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
 ) {

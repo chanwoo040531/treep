@@ -6,6 +6,7 @@ import me.chnu.treep.domain.plan.entity.Plan
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 @Entity
@@ -14,7 +15,7 @@ import java.time.ZonedDateTime
 internal class Itinerary(
     var title: String,
     var description: String,
-    var cost: Double,
+    var cost: BigDecimal,
     var startAt: ZonedDateTime,
     var endAt: ZonedDateTime,
 
@@ -22,7 +23,7 @@ internal class Itinerary(
     @JoinColumn(name = "plan_id")
     val plan: Plan,
 
-) : BaseEntity() {
+    ) : BaseEntity() {
     @CreatedDate
     lateinit var createdAt: ZonedDateTime
 

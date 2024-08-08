@@ -1,13 +1,14 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.domain.plan.entity.Plan
+import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 internal data class PlanRequest(
     val title: String,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
-    val budget: Double,
+    val budget: BigDecimal,
 ) {
     fun toPlan(userId: Long) = Plan(
         userId = userId,
@@ -23,7 +24,7 @@ internal data class PlanResponse(
     val title: String,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
-    val budget: Double,
+    val budget: BigDecimal,
     val createdAt: ZonedDateTime,
     val lastUpdatedAt: ZonedDateTime,
 ) {
