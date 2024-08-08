@@ -1,7 +1,7 @@
 package me.chnu.treep.exception
 
+import io.github.oshai.kotlinlogging.KotlinLogging
 import me.chnu.treep.presentation.ApiResponse
-import mu.KotlinLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
