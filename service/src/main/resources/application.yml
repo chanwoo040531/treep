@@ -25,9 +25,8 @@ spring:
         validator:
           apply_to_ddl: true
         jdbc.lob.non_contextual_creation: true
+        default_schema: plan
 
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: validate
     open-in-view: true

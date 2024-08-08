@@ -2,6 +2,7 @@ package me.chnu.treep.domain.plan.entity
 
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
+import jakarta.persistence.PrePersist
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import me.chnu.treep.domain.BaseEntity
@@ -12,7 +13,7 @@ import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 @Entity
-@Table(schema = "plan", name = "plans")
+@Table(name = "plans")
 @EntityListeners(AuditingEntityListener::class)
 internal class Plan(
     var title: String,
