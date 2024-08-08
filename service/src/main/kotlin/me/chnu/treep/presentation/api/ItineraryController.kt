@@ -1,9 +1,8 @@
 package me.chnu.treep.presentation.api
 
 import me.chnu.treep.application.PlanItineraryUseCase
-import me.chnu.treep.config.AuthUser
+import me.chnu.treep.config.web.AuthUser
 import me.chnu.treep.domain.itinerary.ItineraryReadService
-import me.chnu.treep.domain.itinerary.ItineraryWriteService
 import me.chnu.treep.presentation.ApiResponse
 import me.chnu.treep.util.toURI
 import org.springframework.http.ResponseEntity
