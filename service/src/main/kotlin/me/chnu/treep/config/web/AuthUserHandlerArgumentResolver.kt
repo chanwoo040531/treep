@@ -6,6 +6,8 @@ import com.github.benmanes.caffeine.cache.Scheduler
 import me.chnu.treep.exception.UnauthorizedException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.MethodParameter
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.support.WebDataBinderFactory
 import org.springframework.web.client.RestClient
@@ -35,14 +37,13 @@ internal class AuthUserHandlerArgumentResolver(
         binderFactory: WebDataBinderFactory?
     ): Any? {
         val authHeader: String = webRequest.getHeader("Authorization")
-//            ?: throw UnauthorizedException()
-        ?: "Bearer eyJhbGciOiJIUzI1NiJ9"
+            ?: throw UnauthorizedException()
 
         authUserCache.getIfPresent(authHeader)?.let {
             if (it.expiresAt < System.currentTimeMillis()) {
                 return it
             }
-            authUserCache.invalidate(authHeader)
+            throw UnauthorizedException()
         }
 
         return authUserCache.get(authHeader) {
@@ -51,8 +52,16 @@ internal class AuthUserHandlerArgumentResolver(
                 .uri(authUrl)
                 .header("Authorization", authHeader)
                 .retrieve()
+                .onError(HttpStatus.INTERNAL_SERVER_ERROR, RuntimeException())
+                .onError(HttpStatus.UNAUTHORIZED, UnauthorizedException())
                 .body<AuthUser>()
                 ?: throw UnauthorizedException()
         }
     }
+
+    fun RestClient.ResponseSpec.onError(
+        httpStatus: HttpStatusCode,
+        throwable: Throwable
+    ): RestClient.ResponseSpec =
+        this.onStatus({ it == httpStatus }, { _, _ -> throw throwable })
 }
