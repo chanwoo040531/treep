@@ -25,18 +25,24 @@ internal class ItineraryRequest(
 internal class ItineraryResponse(
     val id: Long,
     val title: String,
+    val description: String,
     val cost: BigDecimal,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
+    val createdAt: ZonedDateTime,
+    val lastUpdatedAt: ZonedDateTime,
 ) {
     companion object {
         fun from(itinerary: Itinerary) = with(itinerary) {
             ItineraryResponse(
                 id = id,
                 title = title,
+                description = description,
                 cost = cost,
                 startAt = startAt,
                 endAt = endAt,
+                createdAt = createdAt,
+                lastUpdatedAt = lastUpdatedAt,
             )
         }
     }

@@ -1,13 +1,8 @@
 package me.chnu.treep.domain.plan.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.EntityListeners
-import jakarta.persistence.PrePersist
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import me.chnu.treep.domain.BaseEntity
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.math.BigDecimal
 import java.time.ZonedDateTime
@@ -23,10 +18,17 @@ internal class Plan(
     @NotNull
     val userId: Long,
 ) : BaseEntity() {
-
-    @CreatedDate
     lateinit var createdAt: ZonedDateTime
-
-    @LastModifiedDate
     lateinit var lastUpdatedAt: ZonedDateTime
+
+    @PrePersist
+    fun prePersist() {
+        createdAt = ZonedDateTime.now()
+        lastUpdatedAt = ZonedDateTime.now()
+    }
+
+    @PreUpdate
+    fun preUpdate() {
+        lastUpdatedAt = ZonedDateTime.now()
+    }
 }
