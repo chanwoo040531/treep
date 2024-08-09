@@ -22,7 +22,7 @@ internal class WebConfig(
         converters.forEach {
             if (it is MappingJackson2HttpMessageConverter) {
                 it.objectMapper = objectMapper
-                return
+                return@extendMessageConverters
             }
         }
 }
