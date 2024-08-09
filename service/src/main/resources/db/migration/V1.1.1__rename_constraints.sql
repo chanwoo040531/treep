@@ -1,0 +1,2 @@
+ALTER TABLE plan.itineraries
+RENAME CONSTRAINT fkkvy0gqqrbsm8epvris3e8ee8u to fk_itineraries_plan_id;
