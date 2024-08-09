@@ -17,7 +17,7 @@ spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependencymanagement = { id = "io.spring.dependency-management", version = "1.1.6" }
 
 [bundles]
-kotest = ["kotest-core", "kotest-junit5", "kotest-property"]
+kotest = ["kotest-core", "kotest-junit5"]
 
 [libraries]
 ## Kotlin
@@ -45,7 +45,7 @@ flyway-postgres = { group = "org.flywaydb", name = "flyway-database-postgresql",
 ## Kotest
 kotest-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
 kotest-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
-kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
+#kotest-property = { group = "io.kotest", name = "kotest-property", version.ref = "kotest" }
 
 ## PostgreSQL
 postgresql = { group = "org.postgresql", name = "postgresql", version = "42.7.2" }
