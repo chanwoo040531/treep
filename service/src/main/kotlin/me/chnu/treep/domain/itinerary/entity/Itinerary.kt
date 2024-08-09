@@ -3,8 +3,6 @@ package me.chnu.treep.domain.itinerary.entity
 import jakarta.persistence.*
 import me.chnu.treep.domain.BaseEntity
 import me.chnu.treep.domain.plan.entity.Plan
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.math.BigDecimal
 import java.time.ZonedDateTime
@@ -23,10 +21,21 @@ internal class Itinerary(
     @JoinColumn(name = "plan_id")
     val plan: Plan,
 
-    ) : BaseEntity() {
-    @CreatedDate
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    val parent: Itinerary? = null,
+) : BaseEntity() {
     lateinit var createdAt: ZonedDateTime
-
-    @LastModifiedDate
     lateinit var lastUpdatedAt: ZonedDateTime
+
+    @PrePersist
+    fun prePersist() {
+        createdAt = ZonedDateTime.now()
+        lastUpdatedAt = ZonedDateTime.now()
+    }
+
+    @PreUpdate
+    fun preUpdate() {
+        lastUpdatedAt = ZonedDateTime.now()
+    }
 }
