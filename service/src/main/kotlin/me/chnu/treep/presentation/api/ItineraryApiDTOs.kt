@@ -6,19 +6,21 @@ import java.math.BigDecimal
 import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
+    val parentId: Long?,
     private val title: String,
     private val cost: BigDecimal,
     private val startAt: ZonedDateTime,
     private val endAt: ZonedDateTime,
     private val description: String,
 ) {
-    fun toItinerary(plan: Plan) = Itinerary(
+    fun toItinerary(plan: Plan, parent: Itinerary?) = Itinerary(
         plan = plan,
         title = title,
         cost = cost,
         startAt = startAt,
         endAt = endAt,
         description = description,
+        parent = parent,
     )
 }
 
