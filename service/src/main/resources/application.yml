@@ -8,7 +8,7 @@ service:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:54321/treep
+    url: jdbc:postgresql://localhost:54321/treep?serverTimezone=UTC
     username: postgres
     password: password
 
