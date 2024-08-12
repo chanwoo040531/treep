@@ -19,8 +19,10 @@ import java.util.concurrent.TimeUnit
 
 @Component
 internal class AuthUserHandlerArgumentResolver(
-    @Value("\${service.auth.url}") val authUrl: String,
+    @Value("\${service.auth.url}")
+    private val authUrl: String,
 ) : HandlerMethodArgumentResolver {
+    private val restClient: RestClient = RestClient.create()
 
     private val authUserCache: Cache<String, AuthUser> = Caffeine.newBuilder()
         .expireAfterWrite(20, TimeUnit.MINUTES)
@@ -40,14 +42,14 @@ internal class AuthUserHandlerArgumentResolver(
             ?: throw UnauthorizedException()
 
         authUserCache.getIfPresent(authHeader)?.let {
-            if (it.expiresAt < System.currentTimeMillis()) {
+            if (it.expiresAt > System.currentTimeMillis()) {
                 return it
             }
             throw UnauthorizedException()
         }
 
         return authUserCache.get(authHeader) {
-            RestClient.create()
+            restClient
                 .get()
                 .uri(authUrl)
                 .header("Authorization", authHeader)
@@ -59,7 +61,7 @@ internal class AuthUserHandlerArgumentResolver(
         }
     }
 
-    fun RestClient.ResponseSpec.onError(
+    private fun RestClient.ResponseSpec.onError(
         httpStatus: HttpStatusCode,
         throwable: Throwable
     ): RestClient.ResponseSpec =
