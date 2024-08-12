@@ -111,7 +111,7 @@ class AuthUserHandlerArgumentResolverTest : ShouldSpec({
             actual.expiresAt shouldBe 1767225600000
         }
 
-        should("throw UnauthorizedException if Authorization header is invalid") {
+        should("throw UnauthorizedException if cached AuthUser is expired") {
             val webRequest = mockkClass(NativeWebRequest::class)
 
             every { webRequest.getHeader("Authorization") } returns "Bearer expired-token"
