@@ -39,4 +39,14 @@ internal class PlanController(
             .let(PlanResponse::from)
             .let { ApiResponse.success(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PutMapping("/{plan-id}")
+    fun update(
+        @PathVariable(value = "plan-id") planId: Long,
+        @RequestBody request: PlanRequest,
+    ): ResponseEntity<ApiResponse<String>> {
+        planWriteService.update(planId, request)
+
+        return ResponseEntity.ok(ApiResponse.success("여행 계획이 수정되었습니다"))
+    }
 }
