@@ -24,6 +24,9 @@ dependencies {
     // Kotest
     testImplementation(libs.bundles.kotest)
 
+    // Mockk
+    testImplementation(libs.mockk)
+
     // In-memory Cache
     implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
 }
