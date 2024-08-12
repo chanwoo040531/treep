@@ -25,3 +25,9 @@ internal annotation class ReadService(@get:AliasFor(annotation = Component::clas
 @Transactional(readOnly = false)
 internal annotation class WriteService(@get:AliasFor(annotation = Component::class) val value: String = "")
 
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
+@Component
+internal annotation class Client(@get:AliasFor(annotation = Component::class) val value: String = "")
+
