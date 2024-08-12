@@ -4,14 +4,11 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.extensions.mockserver.MockServerListener
 import io.kotest.matchers.shouldBe
-import io.mockk.every
-import io.mockk.mockkClass
 import me.chnu.treep.exception.UnauthorizedException
 import org.mockserver.client.MockServerClient
 import org.mockserver.model.Header
 import org.mockserver.model.HttpRequest
 import org.mockserver.model.HttpResponse
-import org.springframework.web.context.request.NativeWebRequest
 
 class UserClientTest : ShouldSpec({
     val userClient = UserClient("http://$MOCK_SERVER_HOST:$MOCK_SERVER_PORT$MOCK_SERVER_ENDPOINT")
@@ -68,21 +65,19 @@ class UserClientTest : ShouldSpec({
 
     context("resolveArgument") {
         should("return AuthUser if Authorization header is valid") {
-            val actual = userClient.get("Bearer available-token")
+            val accessToken = "Bearer available-token"
+            val actual = userClient.get(accessToken)
 
             actual.userId shouldBe 1
             actual.username shouldBe "test"
         }
 
         should("throw UnauthorizedException if cached AuthUser is expired") {
-            val webRequest = mockkClass(NativeWebRequest::class)
-
-            every { webRequest.getHeader("Authorization") } returns "Bearer expired-token"
-
-            userClient.get("Bearer expired-token")
+            val accessToken = "Bearer expired-token"
+            userClient.get(accessToken)
 
             shouldThrow<UnauthorizedException> {
-                userClient.get("Bearer expired-token")
+                userClient.get(accessToken)
             }
         }
     }
