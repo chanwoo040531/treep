@@ -8,15 +8,13 @@ dependencies {
     implementation(libs.spring.boot.validation)
     runtimeOnly(libs.postgresql)
 
+    implementation(libs.spring.boot.security)
+
     developmentOnly(libs.spring.boot.dockercompose)
 
     implementation("com.auth0:java-jwt:4.4.0")
 
     implementation(libs.kotlinlogging)
-
-    // security
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.security:spring-security-test")
 
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
