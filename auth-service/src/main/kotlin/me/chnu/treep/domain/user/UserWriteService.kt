@@ -2,31 +2,48 @@ package me.chnu.treep.domain.user
 
 import me.chnu.treep.annotation.WriteService
 import me.chnu.treep.exception.UserAlreadyExistsException
-import me.chnu.treep.util.JwtClaim
-import me.chnu.treep.util.JwtManager
-import me.chnu.treep.util.JwtManager.decode
 import me.chnu.treep.util.JwtToken
-import me.chnu.treep.util.property.JwtProperties
 import org.springframework.data.redis.core.RedisTemplate
-import org.springframework.data.repository.findByIdOrNull
-import org.springframework.web.client.RestTemplate
-import java.time.Duration
-import java.util.concurrent.TimeUnit
 
-// 사용하지 않는 의존성은 제거하고 후행 콤마를 넣어 보시는게 어떨까요?
 @WriteService
 internal class UserWriteService(
     private val userRepository: UserRepository,
-    private val redisTemplate: RedisTemplate<String, Any>
+    private val redisTemplate: RedisTemplate<String, Any>,
 ) {
-    // 아래처럼 사용하면 확실히 가독성, 명확성이 좋네요
-    // 재사용성을 봤을 땐 find method 가 맞지만 명시성과 성능을 봤을 땐 exists 도 "개인적" 으로 좋다고 생각이 드네요
-    fun signup(authData: AuthData) = with(authData) {
-        userRepository.findByUsername(username)
-            ?.run { throw UserAlreadyExistsException() }
+    fun signup(authData: AuthData): User = with(authData) {
+        val exists = userRepository.existsByUsername(username)
+        if (exists) {
+            throw UserAlreadyExistsException()
+        }
+        validateUsername(username)
+        validatePassword(password)
 
         userRepository.save(authData.toUser())
     }
 
-    fun logout(token: JwtToken) = redisTemplate.delete(token)
+    fun logout(token: JwtToken): Boolean = redisTemplate.delete(token)
+
+    private fun validateUsername(username: String) = username.also {
+        if (it.length < 4) {
+            throw IllegalArgumentException("이메일은 4자 이상이어야 합니다.")
+        } else if (it.length > 320) {
+            throw IllegalArgumentException("이메일은 320자 이하여야 합니다.")
+        } else if (!it.matches(Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))) {
+            throw IllegalArgumentException("이메일 형식이 올바르지 않습니다.")
+        }
+    }
+
+    private fun validatePassword(password: String) = password.also {
+        if (it.length < 8) {
+            throw IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.")
+        } else if (it.length > 20) {
+            throw IllegalArgumentException("비밀번호는 20자 이하여야 합니다.")
+        } else if (!it.matches(Regex(".*[0-9].*"))) {
+            throw IllegalArgumentException("비밀번호는 숫자를 포함해야 합니다.")
+        } else if (!it.matches(Regex(".*[a-zA-Z].*"))) {
+            throw IllegalArgumentException("비밀번호는 영문자를 포함해야 합니다.")
+        } else if (!it.matches(Regex(".*[!@#\$%^&*].*"))) {
+            throw IllegalArgumentException("비밀번호는 특수문자를 포함해야 합니다.")
+        }
+    }
 }
