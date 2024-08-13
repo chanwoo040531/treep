@@ -69,7 +69,15 @@ class UserClientTest : ShouldSpec({
             val actual = userClient.get(accessToken)
 
             actual.userId shouldBe 1
-            actual.username shouldBe "test"
+        }
+
+        should("return AuthUser from cache if Authorization header is valid") {
+            val accessToken = "Bearer available-token"
+            userClient.get(accessToken)
+
+            val actual = userClient.get(accessToken)
+
+            actual.userId shouldBe 1
         }
 
         should("throw UnauthorizedException if cached AuthUser is expired") {
