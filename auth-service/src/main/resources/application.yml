@@ -8,18 +8,24 @@ spring:
       port: 63791
 
   datasource:
-    url: jdbc:postgresql://localhost:54321/treep
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:54321/treep?serverTimezone=UTC
     username: postgres
     password: password
-    driver-class-name: org.postgresql.Driver
 
   jpa:
-    hibernate:
-      ddl-auto: update
-
+    show-sql: true
     properties:
       hibernate:
+        check_nullability: true
+        validator:
+          apply_to_ddl: true
+        jdbc.lob.non_contextual_creation: true
+        default_schema: plan
         show_sql: true
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
 
 
 jwt:
