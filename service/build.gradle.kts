@@ -5,6 +5,7 @@ dependencies {
     implementation(libs.spring.boot.web)
     implementation(libs.spring.boot.actuator)
     implementation(libs.spring.boot.validation)
+    implementation(libs.spring.boot.aop)
     testImplementation(libs.spring.boot.test)
 
     // Database
