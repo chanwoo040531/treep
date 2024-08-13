@@ -1,5 +1,6 @@
 package me.chnu.treep.presentation.api
 
+import me.chnu.treep.annotation.LoginRequired
 import me.chnu.treep.config.web.AuthUser
 import me.chnu.treep.domain.plan.PlanReadService
 import me.chnu.treep.domain.plan.PlanWriteService
@@ -26,6 +27,7 @@ internal class PlanController(
             .body(ApiResponse.success("여행 계획이 생성되었습니다"))
     }
 
+    @LoginRequired
     @GetMapping
     fun getAll(): ResponseEntity<ApiResponse<List<PlanResponse>>> =
         planReadService.getAll()
@@ -33,6 +35,7 @@ internal class PlanController(
             .let { ApiResponse.success(it) }
             .let { ResponseEntity.ok(it) }
 
+    @LoginRequired
     @GetMapping("/{plan-id}")
     fun get(@PathVariable(value = "plan-id") planId: Long): ResponseEntity<ApiResponse<PlanResponse>> =
         planReadService.get(planId)
@@ -40,6 +43,7 @@ internal class PlanController(
             .let { ApiResponse.success(it) }
             .let { ResponseEntity.ok(it) }
 
+    @LoginRequired
     @PutMapping("/{plan-id}")
     fun update(
         @PathVariable(value = "plan-id") planId: Long,
@@ -48,5 +52,13 @@ internal class PlanController(
         planWriteService.update(planId, request)
 
         return ResponseEntity.ok(ApiResponse.success("여행 계획이 수정되었습니다"))
+    }
+
+    @LoginRequired
+    @DeleteMapping("/{plan-id}")
+    fun delete(@PathVariable(value = "plan-id") planId: Long): ResponseEntity<ApiResponse<String>> {
+        planWriteService.delete(planId)
+
+        return ResponseEntity.ok(ApiResponse.success("여행 계획이 삭제되었습니다"))
     }
 }
