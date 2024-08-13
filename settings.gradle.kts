@@ -1,3 +1,3 @@
 rootProject.name = "treep"
-include("service")
+include("plan-service")
 include("auth-service")
