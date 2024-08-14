@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @EnableAspectJAutoProxy
 @EnableJpaAuditing
 @SpringBootApplication
-class Application
+class PlanApplication
 
 fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+    runApplication<PlanApplication>(*args)
 }
