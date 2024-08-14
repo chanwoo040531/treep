@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @EnableJpaAuditing
-class TreepAuthApplication
+class AuthApplication
 
 fun main(args: Array<String>) {
-    runApplication<TreepAuthApplication>(*args)
+    runApplication<AuthApplication>(*args)
 }
