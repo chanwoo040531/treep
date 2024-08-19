@@ -21,10 +21,12 @@ internal class PlanController(
         authUser: AuthUser,
         @RequestBody request: PlanRequest,
     ): ResponseEntity<ApiResponse<String>> {
-        request.toPlan(userId = authUser.userId).let(planWriteService::create)
+        val plan = request.toPlan(userId = authUser.userId)
 
-        return ResponseEntity.created("/api/v1/plans/${authUser.userId}".toURI())
-            .body(ApiResponse.success("여행 계획이 생성되었습니다"))
+        return planWriteService.create(plan)
+            .let { "/api/v1/plans/${it.id}".toURI() }
+            .let { ResponseEntity.created(it)
+                    .body(ApiResponse.success("여행 계획이 생성되었습니다")) }
     }
 
     @LoginRequired
