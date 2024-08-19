@@ -7,11 +7,11 @@ import java.time.ZonedDateTime
 
 internal class ItineraryRequest(
     val parentId: Long?,
-    private val title: String,
-    private val cost: BigDecimal,
-    private val startAt: ZonedDateTime,
-    private val endAt: ZonedDateTime,
-    private val description: String,
+    val title: String,
+    val cost: BigDecimal,
+    val startAt: ZonedDateTime,
+    val endAt: ZonedDateTime,
+    val description: String,
 ) {
     fun toItinerary(plan: Plan, parent: Itinerary?) = Itinerary(
         plan = plan,
