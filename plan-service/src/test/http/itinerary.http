@@ -1,6 +1,11 @@
+@base = http://localhost:8080
+@plan-id = 10
+@itinerary-id = 5
+
 ### Post Itinerary
-POST http://localhost:8080/v1/plans/1/itineraries
+POST {{base}}/v1/plans/{{plan-id}}/itineraries
 Content-Type: application/json
+Authorization: test
 
 {
   "title":"밥먹기",
@@ -12,7 +17,23 @@ Content-Type: application/json
 }
 
 ### Get Itineraries
-GET http://localhost:8080/v1/plans/1/itineraries
+GET {{base}}/v1/plans/{{plan-id}}}/itineraries
+Authorization: test
 
 ### Get Itinerary
-GET http://localhost:8080/v1/plans/1/itineraries/1
+GET {{base}}/v1/plans/{{plan-id}}/itineraries/{{itinerary-id}}
+Authorization: test
+
+### Put Itinerary
+PUT {{base}}/v1/plans/{{plan-id}}/itineraries/{{itinerary-id}}
+Content-Type: application/json
+Authorization: test
+
+{
+  "title":"밥먹기",
+  "cost": 13000,
+  "startAt":"2024-05-31T12:30:00Z",
+  "endAt": "2024-05-31T11:30:00Z",
+  "description":"점심",
+  "parentId": 3
+}

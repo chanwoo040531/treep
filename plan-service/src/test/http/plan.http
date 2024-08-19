@@ -1,0 +1,33 @@
+@base = http://localhost:8080
+@plan-id = 10
+
+### Post Plan
+POST {{base}}/v1/plans
+Content-Type: application/json
+Authorization: Bearer test
+
+{
+    "title": "title",
+    "startAt": "2024-05-31T09:30:00Z",
+    "endAt": "2024-06-05T18:00:00Z",
+    "budget": 500000
+}
+
+### Get Plans
+GET {{base}}/v1/plans
+Authorization: Bearer test
+
+### Get Plan
+GET {{base}}/v1/plans/{{plan-id}}
+
+### Update Plan
+PUT {{base}}/v1/plans/{{plan-id}}
+Content-Type: application/json
+Authorization: Bearer test
+
+{
+  "title": "title updated",
+  "startAt": "2024-05-31T09:30:00Z",
+  "endAt": "2024-06-05T18:00:00Z",
+  "budget": 300000
+}
