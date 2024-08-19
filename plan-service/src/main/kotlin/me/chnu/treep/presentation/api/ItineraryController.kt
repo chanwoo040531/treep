@@ -1,8 +1,10 @@
 package me.chnu.treep.presentation.api
 
+import me.chnu.treep.annotation.LoginRequired
 import me.chnu.treep.application.PlanItineraryUseCase
 import me.chnu.treep.config.web.AuthUser
 import me.chnu.treep.domain.itinerary.ItineraryReadService
+import me.chnu.treep.domain.itinerary.ItineraryWriteService
 import me.chnu.treep.presentation.ApiResponse
 import me.chnu.treep.util.toURI
 import org.springframework.http.ResponseEntity
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.*
 internal class ItineraryController(
     private val planItineraryUseCase: PlanItineraryUseCase,
     private val itineraryReadService: ItineraryReadService,
+    private val itineraryWriteService: ItineraryWriteService,
 ) {
+    @LoginRequired
     @PostMapping
     fun create(
         authUser: AuthUser,
@@ -45,4 +49,16 @@ internal class ItineraryController(
             .let(ItineraryResponse::from)
             .let { ApiResponse.success(it) }
             .let { ResponseEntity.ok(it) }
+
+    @LoginRequired
+    @PutMapping("/{itinerary-id}")
+    fun update(
+        @PathVariable(value = "plan-id") planId: Long,
+        @PathVariable(value = "itinerary-id") itineraryId: Long,
+        @RequestBody request: ItineraryRequest,
+    ): ResponseEntity<ApiResponse<String>> {
+        itineraryWriteService.update(itineraryId, request)
+
+        return ResponseEntity.ok(ApiResponse.success("일정이 수정되었습니다"))
+    }
 }
