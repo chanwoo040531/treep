@@ -29,7 +29,6 @@ internal class PlanController(
                     .body(ApiResponse.success("여행 계획이 생성되었습니다")) }
     }
 
-    @LoginRequired
     @GetMapping
     fun getAll(): ResponseEntity<ApiResponse<List<PlanResponse>>> =
         planReadService.getAll()
@@ -37,7 +36,6 @@ internal class PlanController(
             .let { ApiResponse.success(it) }
             .let { ResponseEntity.ok(it) }
 
-    @LoginRequired
     @GetMapping("/{plan-id}")
     fun get(@PathVariable(value = "plan-id") planId: Long): ResponseEntity<ApiResponse<PlanResponse>> =
         planReadService.get(planId)
