@@ -21,10 +21,10 @@ spring:
         validator:
           apply_to_ddl: true
         jdbc.lob.non_contextual_creation: true
-        default_schema: plan
+        default_schema: auth
         show_sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     open-in-view: true
 
 
