@@ -4,7 +4,7 @@ import me.chnu.treep.domain.Key
 import me.chnu.treep.domain.user.AuthData
 import me.chnu.treep.domain.user.AuthInfo
 import me.chnu.treep.domain.user.UserInfo
-import me.chnu.treep.util.JwtToken
+import me.chnu.treep.jwt.JwtToken
 import java.time.LocalDateTime
 
 internal data class SignUpRequest(

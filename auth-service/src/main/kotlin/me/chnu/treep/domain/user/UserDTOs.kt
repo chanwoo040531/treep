@@ -2,7 +2,7 @@ package me.chnu.treep.domain.user
 
 import me.chnu.treep.domain.Key
 import me.chnu.treep.util.EncryptManager.encrypt
-import me.chnu.treep.util.JwtToken
+import me.chnu.treep.jwt.JwtToken
 import java.time.LocalDateTime
 
 internal data class AuthData(

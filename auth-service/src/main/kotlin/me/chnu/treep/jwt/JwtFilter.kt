@@ -1,21 +1,14 @@
 package me.chnu.treep.jwt
 
-import com.auth0.jwt.interfaces.DecodedJWT
 import jakarta.servlet.FilterChain
-import jakarta.servlet.ServletRequest
-import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import me.chnu.treep.domain.user.UserReadService
-import me.chnu.treep.util.JwtManager
 import me.chnu.treep.util.JwtManager.decode
 import me.chnu.treep.util.property.JwtProperties
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.springframework.web.filter.GenericFilterBean
 import org.springframework.web.filter.OncePerRequestFilter
 
 // 사용하지 않는 의존성(import)은 지우는게 좋아보여요
@@ -40,7 +33,7 @@ internal class JwtFilter(
          * 변수명을 보면 파악이 가능하지만 메서드 명으로도 파악할 수 있게 노력해보는 것도 좋을거같아요.
          */
         if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
-            val jwtToken = tokenHeader.split(" ")[1]
+            val jwtToken = JwtToken(tokenHeader.split(" ")[1])
             val decodedJWT = jwtToken.decode(jwtProperties.secret, jwtProperties.issuer)
             val username = decodedJWT.claims["username"]?.asString()
             /**

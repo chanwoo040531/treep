@@ -4,7 +4,7 @@ import me.chnu.treep.annotation.AuthToken
 import me.chnu.treep.domain.user.UserReadService
 import me.chnu.treep.domain.user.UserWriteService
 import me.chnu.treep.presentation.ApiResponse
-import me.chnu.treep.util.JwtToken
+import me.chnu.treep.jwt.JwtToken
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

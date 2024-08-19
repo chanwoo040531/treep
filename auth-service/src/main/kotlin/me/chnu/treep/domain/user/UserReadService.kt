@@ -10,7 +10,7 @@ import me.chnu.treep.util.EncryptManager.verify
 import me.chnu.treep.util.JwtClaim
 import me.chnu.treep.util.JwtManager
 import me.chnu.treep.util.JwtManager.decode
-import me.chnu.treep.util.JwtToken
+import me.chnu.treep.jwt.JwtToken
 import me.chnu.treep.util.property.JwtProperties
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.repository.findByIdOrNull
@@ -49,8 +49,8 @@ internal class UserReadService(
              * 하나의 컴포넌트만 바꾸면 되기때문에 더 좋지 않을까요?
              * 그렇지 않다면 redis template 을 사용하는 모든 component 들을 전부 바꿔줘야하겠네요.
              */
-            redisTemplate.opsForValue().set(token, id.toString())
-            redisTemplate.expire(token, Duration.ofMinutes(1L))
+            redisTemplate.opsForValue().set(token.value, id.toString())
+            redisTemplate.expire(token.value, Duration.ofMinutes(1L))
 
             AuthInfo(
                 username = username,
@@ -60,8 +60,8 @@ internal class UserReadService(
 
     // 여기도 위와 마찬가지에요
     fun getByToken(token: JwtToken): UserInfo {
-        val userId = if (redisTemplate.hasKey(token)) {
-            val userId = redisTemplate.opsForValue().getAndExpire(token, 1L, TimeUnit.MINUTES) ?: throw InvalidJwtTokenException()
+        val userId = if (redisTemplate.hasKey(token.value)) {
+            val userId = redisTemplate.opsForValue().getAndExpire(token.value, 1L, TimeUnit.MINUTES) ?: throw InvalidJwtTokenException()
             // 취향 차이지만... userId as Long 으로 했으면 형변환이 한번만 일어났을거같네요
             val toLong = userId.toString().toLong()
             toLong
@@ -74,8 +74,8 @@ internal class UserReadService(
              */
             val userId = decodedJWT.claims["userId"]?.asLong()
 
-            redisTemplate.opsForValue().set(token, userId.toString())
-            redisTemplate.expire(token, Duration.ofMinutes(1L))
+            redisTemplate.opsForValue().set(token.value, userId.toString())
+            redisTemplate.expire(token.value, Duration.ofMinutes(1L))
             userId
         }  ?: throw InvalidJwtTokenException() // <- 띄어쓰기가 두번 들어갔는데 이런 부분은 조금 신경을 써주면 좀더 좋을거같아요 (의도 한걸수도 있지만 ㅋㅋ)
 
