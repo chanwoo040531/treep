@@ -16,6 +16,7 @@ services:
   mock-server:
     image: nginx:latest
     container_name: auth-mock-server
+    restart: always
     ports:
       - "9090:80"
     volumes:
