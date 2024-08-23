@@ -2,7 +2,7 @@ package me.chnu.treep.domain.user
 
 import me.chnu.treep.annotation.WriteService
 import me.chnu.treep.exception.UserAlreadyExistsException
-import me.chnu.treep.jwt.JwtToken
+import me.chnu.treep.jwt.AccessToken
 import org.springframework.data.redis.core.RedisTemplate
 
 @WriteService
@@ -21,7 +21,7 @@ internal class UserWriteService(
         userRepository.save(authData.toUser())
     }
 
-    fun logout(token: JwtToken): Boolean = redisTemplate.delete(token.value)
+    fun logout(token: AccessToken): Boolean = redisTemplate.delete(token.value)
 
     private fun validateUsername(username: String) = username.also {
         if (it.length < 4) {
