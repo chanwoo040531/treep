@@ -15,13 +15,12 @@ internal class JwtFilter(
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         request.getHeader("Authorization")?.let {
             if (it.startsWith("Bearer ")) {
-                val accessToken = it.split(" ")[1]
-                val jwtToken = JwtToken(accessToken)
-                val decodedJWT = jwtToken.decode(jwtProperties.secret, jwtProperties.issuer)
+                val accessToken = AccessToken(it.split(" ")[1])
+                val decodedJWT = accessToken.decode(jwtProperties.secret, jwtProperties.issuer)
                 val username = decodedJWT.claims["username"]?.asString()
                     ?: throw IllegalArgumentException("username claim not found")
 

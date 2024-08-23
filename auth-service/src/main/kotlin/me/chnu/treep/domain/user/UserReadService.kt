@@ -1,16 +1,15 @@
 package me.chnu.treep.domain.user
 
-import com.auth0.jwt.interfaces.DecodedJWT
 import me.chnu.treep.annotation.ReadService
 import me.chnu.treep.domain.Key
 import me.chnu.treep.exception.InvalidJwtTokenException
 import me.chnu.treep.exception.InvalidPasswordException
 import me.chnu.treep.exception.NotFoundException
+import me.chnu.treep.jwt.AccessToken
 import me.chnu.treep.util.EncryptManager.verify
 import me.chnu.treep.util.JwtClaim
 import me.chnu.treep.util.JwtManager
 import me.chnu.treep.util.JwtManager.decode
-import me.chnu.treep.jwt.JwtToken
 import me.chnu.treep.util.property.JwtProperties
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.repository.findByIdOrNull
@@ -36,11 +35,10 @@ internal class UserReadService(
                 throw InvalidPasswordException()
             }
             val jwtClaim = JwtClaim(
-                userId = id,
                 username = username,
             )
 
-            val token: JwtToken = JwtManager.createToken(jwtClaim, jwtProperties)
+            val token: AccessToken = JwtManager.createToken(jwtClaim, jwtProperties)
 
             /**
              * 이 부분은 redis template 이 비즈니스 로직에 침투 하게 되었네요
@@ -59,7 +57,7 @@ internal class UserReadService(
         }
 
     // 여기도 위와 마찬가지에요
-    fun getByToken(token: JwtToken): UserInfo {
+    fun getByToken(token: AccessToken): UserInfo {
         val userId = if (redisTemplate.hasKey(token.value)) {
             val userId = redisTemplate.opsForValue().getAndExpire(token.value, 1L, TimeUnit.MINUTES) ?: throw InvalidJwtTokenException()
             // 취향 차이지만... userId as Long 으로 했으면 형변환이 한번만 일어났을거같네요
@@ -89,7 +87,3 @@ internal class UserReadService(
     fun get(userId: Key): User =
         userRepository.findByIdOrNull(userId) ?: throw NotFoundException("유저를 찾을 수 없습니다")
 }
-
-// 예시
-private val DecodedJWT.userId
-    get() = this.claims["userId"]?.asLong()

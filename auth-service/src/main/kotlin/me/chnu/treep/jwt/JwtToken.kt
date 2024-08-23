@@ -1,4 +1,4 @@
 package me.chnu.treep.jwt
 
 @JvmInline
-internal value class JwtToken(val value: String)
+internal value class AccessToken(val value: String)
