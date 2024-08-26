@@ -1,7 +1,7 @@
 package me.chnu.treep.config
 
 import me.chnu.treep.annotation.AuthToken
-import me.chnu.treep.jwt.JwtToken
+import me.chnu.treep.jwt.AccessToken
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
@@ -46,7 +46,6 @@ class AuthTokenResolver : HandlerMethodArgumentResolver {
 
         // Authorization: Bearer <token>
         val token = authHeader.split(" ")[1]
-        return JwtToken(token)
+        return AccessToken(token)
     }
-
 }
