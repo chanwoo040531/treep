@@ -4,7 +4,7 @@ import me.chnu.treep.domain.Key
 import me.chnu.treep.domain.user.AuthData
 import me.chnu.treep.domain.user.AuthInfo
 import me.chnu.treep.domain.user.UserInfo
-import me.chnu.treep.jwt.JwtToken
+import me.chnu.treep.jwt.AccessToken
 import java.time.LocalDateTime
 
 internal data class SignUpRequest(
@@ -29,7 +29,7 @@ internal data class SignInRequest(
 
 internal data class SignInResponse(
     val username: String,
-    val token: JwtToken,
+    val token: AccessToken,
 ) {
     companion object {
         fun from(authInfo: AuthInfo) = SignInResponse(

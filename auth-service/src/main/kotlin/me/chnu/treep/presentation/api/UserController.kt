@@ -3,8 +3,8 @@ package me.chnu.treep.presentation.api
 import me.chnu.treep.annotation.AuthToken
 import me.chnu.treep.domain.user.UserReadService
 import me.chnu.treep.domain.user.UserWriteService
+import me.chnu.treep.jwt.AccessToken
 import me.chnu.treep.presentation.ApiResponse
-import me.chnu.treep.jwt.JwtToken
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -31,11 +31,11 @@ internal class UserController(
 
 
     @DeleteMapping("/logout")
-    fun logout(@AuthToken token: JwtToken) =
+    fun logout(@AuthToken token: AccessToken) =
         userWriteService.logout(token)
 
     @GetMapping("/info")
-    fun get(@AuthToken token: JwtToken): ResponseEntity<ApiResponse<UserResponse>> {
+    fun get(@AuthToken token: AccessToken): ResponseEntity<ApiResponse<UserResponse>> {
         val response = userReadService.getByToken(token).let(UserResponse::from)
 
         return ResponseEntity.ok(ApiResponse.success(response))
