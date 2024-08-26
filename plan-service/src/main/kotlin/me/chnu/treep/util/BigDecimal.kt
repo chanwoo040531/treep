@@ -1,15 +1,7 @@
 package me.chnu.treep.util
 
 import java.math.BigDecimal
-
-/**
- * Converts this Int to a BigDecimal.
- *
- * @return a BigDecimal representation of this Int.
- */
-fun Int.d(): BigDecimal {
-    return BigDecimal(this)
-}
+import java.math.MathContext
 
 /**
  * Converts this Double to a BigDecimal.
@@ -19,6 +11,15 @@ fun Int.d(): BigDecimal {
  * @return a BigDecimal representation of this Double.
  */
 fun Double.d(): BigDecimal {
+    return BigDecimal(this, MathContext.DECIMAL64)
+}
+
+/**
+ * Converts this Int to a BigDecimal.
+ *
+ * @return a BigDecimal representation of this Int.
+ */
+fun Int.d(): BigDecimal {
     return BigDecimal(this)
 }
 
