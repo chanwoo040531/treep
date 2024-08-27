@@ -36,4 +36,7 @@ jwt:
 
 logging:
   level:
-    root: debug
+    me.chnu: debug
+    org.springframework:
+      boot: info
+    com.fasterxml.jackson: debug
