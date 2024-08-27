@@ -6,14 +6,12 @@ import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
-typealias Key = Long
-
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Key = 0L,
+    val id: Long = 0L,
 
     @CreatedDate
     var createdAt: LocalDateTime? = null,

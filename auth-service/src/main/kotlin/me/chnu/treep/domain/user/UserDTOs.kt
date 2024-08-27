@@ -1,6 +1,5 @@
 package me.chnu.treep.domain.user
 
-import me.chnu.treep.domain.Key
 import me.chnu.treep.jwt.AccessToken
 import me.chnu.treep.util.EncryptManager.encrypt
 import java.time.LocalDateTime
@@ -21,7 +20,7 @@ internal data class AuthInfo(
 )
 
 internal data class UserInfo(
-    val userId: Key,
+    val userId: Long,
     val username: String,
     val password: String,
     val updatedAt: LocalDateTime,

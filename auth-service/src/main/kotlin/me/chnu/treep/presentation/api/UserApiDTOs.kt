@@ -1,6 +1,5 @@
 package me.chnu.treep.presentation.api
 
-import me.chnu.treep.domain.Key
 import me.chnu.treep.domain.user.AuthData
 import me.chnu.treep.domain.user.AuthInfo
 import me.chnu.treep.domain.user.UserInfo
@@ -40,7 +39,7 @@ internal data class SignInResponse(
 }
 
 internal data class UserResponse(
-    val userId: Key,
+    val userId: Long,
     val username: String,
     val password: String,
     val updatedAt: LocalDateTime,
