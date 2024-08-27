@@ -6,7 +6,7 @@ import me.chnu.treep.domain.BaseEntity
 import me.chnu.treep.util.Password
 
 @Entity
-@Table(schema = "user", name = "users")
+@Table(name = "users")
 internal class User(
     var username: String,
     var password: Password,
