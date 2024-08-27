@@ -16,7 +16,7 @@ dependencies {
 
     implementation(libs.kotlinlogging)
 
-    kapt("org.springframework.boot:spring-boot-configuration-processor")
+//    kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     implementation("at.favre.lib:bcrypt:0.9.0")
 }
