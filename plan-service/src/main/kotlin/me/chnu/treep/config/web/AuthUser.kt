@@ -6,5 +6,11 @@ internal data class AuthUser(
     @get:JsonProperty("id")
     val userId: Long,
     val username: String,
-    val expiresAt: Long
+    val expiresAt: Long,
+    val roles: List<Role>,
 )
+
+enum class Role {
+    USER,
+    ADMIN
+}
