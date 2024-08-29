@@ -22,9 +22,9 @@ internal class UserController(
         return ResponseEntity.noContent().build()
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     fun signIn(@RequestBody request: SignInRequest): ResponseEntity<ApiResponse<SignInResponse>> {
-        val response = userReadService.signIn(request.toAuthData()).let(SignInResponse::from)
+        val response = userWriteService.signIn(request.toAuthData()).let(SignInResponse::from)
 
         return ResponseEntity.ok(ApiResponse.success(response))
     }
