@@ -1,36 +1,31 @@
 package me.chnu.treep.presentation.api
 
+import me.chnu.treep.config.web.UserId
 import me.chnu.treep.domain.itinerary.entity.Itinerary
-import me.chnu.treep.domain.plan.entity.Plan
-import java.math.BigDecimal
+import me.chnu.treep.domain.itinerary.entity.ItineraryId
 import java.time.ZonedDateTime
 
-internal class ItineraryRequest(
-    val parentId: Long?,
+internal data class ItineraryRequest(
     val title: String,
-    val cost: BigDecimal,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
-    val description: String,
+    val budget: Double,
 ) {
-    fun toItinerary(plan: Plan, parent: Itinerary?) = Itinerary(
-        plan = plan,
-        title = title,
-        cost = cost,
-        startAt = startAt,
-        endAt = endAt,
-        description = description,
-        parent = parent,
+    fun toItinerary(userId: UserId) = Itinerary(
+        userId = userId,
+        title = this.title,
+        startAt = this.startAt,
+        endAt = this.endAt,
+        budget = this.budget,
     )
 }
 
-internal class ItineraryResponse(
-    val id: Long,
+internal data class ItineraryResponse(
+    val id: ItineraryId,
     val title: String,
-    val description: String,
-    val cost: BigDecimal,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,
+    val budget: Double,
     val createdAt: ZonedDateTime,
     val lastUpdatedAt: ZonedDateTime,
 ) {
@@ -39,13 +34,13 @@ internal class ItineraryResponse(
             ItineraryResponse(
                 id = id,
                 title = title,
-                description = description,
-                cost = cost,
                 startAt = startAt,
                 endAt = endAt,
+                budget = budget,
                 createdAt = createdAt,
                 lastUpdatedAt = lastUpdatedAt,
             )
         }
     }
 }
+

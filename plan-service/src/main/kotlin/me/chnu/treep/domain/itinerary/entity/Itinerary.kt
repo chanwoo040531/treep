@@ -1,30 +1,27 @@
 package me.chnu.treep.domain.itinerary.entity
 
 import jakarta.persistence.*
-import me.chnu.treep.domain.BaseEntity
-import me.chnu.treep.domain.plan.entity.Plan
+import jakarta.validation.constraints.NotNull
+import me.chnu.treep.config.web.UserId
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.math.BigDecimal
 import java.time.ZonedDateTime
+
+@JvmInline
+value class ItineraryId(val value: Long)
 
 @Entity
 @Table(name = "itineraries")
 @EntityListeners(AuditingEntityListener::class)
 internal class Itinerary(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: ItineraryId = ItineraryId(0L),
     var title: String,
-    var description: String,
-    var cost: BigDecimal,
     var startAt: ZonedDateTime,
     var endAt: ZonedDateTime,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id")
-    val plan: Plan,
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    val parent: Itinerary? = null,
-) : BaseEntity() {
+    var budget: Double,
+    val userId: UserId,
+) {
     lateinit var createdAt: ZonedDateTime
     lateinit var lastUpdatedAt: ZonedDateTime
 
@@ -37,5 +34,22 @@ internal class Itinerary(
     @PreUpdate
     fun preUpdate() {
         lastUpdatedAt = ZonedDateTime.now()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (this.javaClass != other?.javaClass) {
+            return false
+        }
+
+        other as Itinerary
+
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 }
