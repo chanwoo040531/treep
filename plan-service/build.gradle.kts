@@ -11,6 +11,7 @@ dependencies {
     // Database
     implementation(libs.spring.boot.data.jpa)
     runtimeOnly(libs.postgresql)
+    implementation(libs.spring.boot.data.mongodb)
 
     implementation(libs.flyway.core)
     implementation(libs.flyway.postgres)
