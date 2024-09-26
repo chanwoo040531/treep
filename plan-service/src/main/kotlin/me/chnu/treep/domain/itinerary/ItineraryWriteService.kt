@@ -2,7 +2,6 @@ package me.chnu.treep.domain.itinerary
 
 import me.chnu.treep.annotation.WriteService
 import me.chnu.treep.domain.itinerary.entity.Itinerary
-import me.chnu.treep.domain.itinerary.entity.ItineraryId
 import me.chnu.treep.domain.itinerary.entity.ItineraryRepository
 import me.chnu.treep.exception.NotFoundException
 import me.chnu.treep.presentation.api.ItineraryRequest
@@ -13,7 +12,7 @@ internal class ItineraryWriteService(
 ) {
     fun create(itinerary: Itinerary): Itinerary = itineraryRepository.save(itinerary)
 
-    fun update(itineraryId: ItineraryId, request: ItineraryRequest): Unit =
+    fun update(itineraryId: Long, request: ItineraryRequest): Unit =
         itineraryRepository.findById(itineraryId)
             .orElseThrow { throw NotFoundException("Plan not found") }
             .apply {
@@ -24,5 +23,5 @@ internal class ItineraryWriteService(
             }
             .let { itineraryRepository.save(it) }
 
-    fun delete(itineraryId: ItineraryId): Unit = itineraryRepository.deleteById(itineraryId)
+    fun delete(itineraryId: Long): Unit = itineraryRepository.deleteById(itineraryId)
 }

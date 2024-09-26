@@ -2,7 +2,6 @@ package me.chnu.treep.presentation.api
 
 import me.chnu.treep.config.web.UserId
 import me.chnu.treep.domain.itinerary.entity.Itinerary
-import me.chnu.treep.domain.itinerary.entity.ItineraryId
 import java.time.ZonedDateTime
 
 internal data class ItineraryRequest(
@@ -21,7 +20,7 @@ internal data class ItineraryRequest(
 }
 
 internal data class ItineraryResponse(
-    val id: ItineraryId,
+    val id: Long,
     val title: String,
     val startAt: ZonedDateTime,
     val endAt: ZonedDateTime,

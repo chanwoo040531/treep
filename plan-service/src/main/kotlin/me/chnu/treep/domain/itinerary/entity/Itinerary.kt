@@ -1,13 +1,9 @@
 package me.chnu.treep.domain.itinerary.entity
 
 import jakarta.persistence.*
-import jakarta.validation.constraints.NotNull
 import me.chnu.treep.config.web.UserId
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.ZonedDateTime
-
-@JvmInline
-value class ItineraryId(val value: Long)
 
 @Entity
 @Table(name = "itineraries")
@@ -15,7 +11,7 @@ value class ItineraryId(val value: Long)
 internal class Itinerary(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: ItineraryId = ItineraryId(0L),
+    val id: Long = 0L,
     var title: String,
     var startAt: ZonedDateTime,
     var endAt: ZonedDateTime,

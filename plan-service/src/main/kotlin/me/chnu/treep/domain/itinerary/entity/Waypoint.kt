@@ -6,13 +6,10 @@ import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.ZonedDateTime
 
-@JvmInline
-value class WaypointId(val value: String)
-
 @Document(collation = "waypoints")
 class Waypoint(
     @Id
-    val id: WaypointId,
+    val id: String,
 
     var type: WaypointType,
 

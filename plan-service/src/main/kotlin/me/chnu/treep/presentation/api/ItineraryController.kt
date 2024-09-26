@@ -4,7 +4,6 @@ import me.chnu.treep.annotation.LoginRequired
 import me.chnu.treep.config.web.AuthUser
 import me.chnu.treep.domain.itinerary.ItineraryReadService
 import me.chnu.treep.domain.itinerary.ItineraryWriteService
-import me.chnu.treep.domain.itinerary.entity.ItineraryId
 import me.chnu.treep.presentation.ApiResponse
 import me.chnu.treep.util.toURI
 import org.springframework.http.ResponseEntity
@@ -26,8 +25,10 @@ internal class ItineraryController(
 
         return itineraryWriteService.create(itinerary)
             .let { "/api/v1/itineraries/${it.id}".toURI() }
-            .let { ResponseEntity.created(it)
-                    .body(ApiResponse.success("여행 계획이 생성되었습니다")) }
+            .let {
+                ResponseEntity.created(it)
+                    .body(ApiResponse.success("여행 계획이 생성되었습니다"))
+            }
     }
 
     @GetMapping
@@ -38,7 +39,7 @@ internal class ItineraryController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{itinerary-id}")
-    fun get(@PathVariable(value = "itinerary-id") itineraryId: ItineraryId): ResponseEntity<ApiResponse<ItineraryResponse>> =
+    fun get(@PathVariable(value = "itinerary-id") itineraryId: Long): ResponseEntity<ApiResponse<ItineraryResponse>> =
         itineraryReadService.get(itineraryId)
             .let(ItineraryResponse::from)
             .let { ApiResponse.success(it) }
@@ -47,7 +48,7 @@ internal class ItineraryController(
     @LoginRequired
     @PutMapping("/{itinerary-id}")
     fun update(
-        @PathVariable(value = "itinerary-id") itineraryId: ItineraryId,
+        @PathVariable(value = "itinerary-id") itineraryId: Long,
         @RequestBody request: ItineraryRequest,
     ): ResponseEntity<ApiResponse<String>> {
         itineraryWriteService.update(itineraryId, request)
@@ -57,7 +58,7 @@ internal class ItineraryController(
 
     @LoginRequired
     @DeleteMapping("/{itinerary-id}")
-    fun delete(@PathVariable(value = "itinerary-id") itineraryId: ItineraryId): ResponseEntity<ApiResponse<String>> {
+    fun delete(@PathVariable(value = "itinerary-id") itineraryId: Long): ResponseEntity<ApiResponse<String>> {
         itineraryWriteService.delete(itineraryId)
 
         return ResponseEntity.ok(ApiResponse.success("여행 계획이 삭제되었습니다"))
